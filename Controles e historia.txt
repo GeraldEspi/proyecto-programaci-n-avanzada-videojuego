@@ -1,0 +1,21 @@
+En el futuro la lluvia en todo el mundo comienza a volverse altamente ácida, tu, siendo la persona más decidida a sobrevivir, tienes que recolectar agua para tu familia, tu única opción por el momento es ponerte bajo la lluvia y almacenarla en un balde, evitando las gotas ácidas contaminadas que queman la piel. 
+
+Por suerte el gobierno comenzó a purificar las nubes y en función de esto, algunas gotas vienen con propiedades especiales que reducen la acidez.
+
+Llena ese balde y llévaselo a tu familia, ellos te necesitan!
+
+
+Controles
+
+Movimiento:
+
+Flecha izquierda  / Movimiento hacia izquierda
+
+Flecha derecha  / Movimiento hacia derecha
+--------------------------------------------------------------
+Movimiento especiales:
+
+Flecha izquierda  + Espacio / Sprinteo izquierdo
+
+Flecha derecha  + Espacio / Sprinteo derecho
+
