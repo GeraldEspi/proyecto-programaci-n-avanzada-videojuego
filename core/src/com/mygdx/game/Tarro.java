@@ -97,20 +97,30 @@ public class Tarro {
 			}*/
 		   //movimiento desde teclado
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.UP)) bucket.y += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) bucket.y -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x -= velx * Gdx.graphics.getDeltaTime()*2;
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x += velx * Gdx.graphics.getDeltaTime()*2;
-		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y += velx * Gdx.graphics.getDeltaTime()*2;
+		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y -= velx * Gdx.graphics.getDeltaTime()*2;
 		   
 		   // WASD format
 		   if(Gdx.input.isKeyPressed(Input.Keys.A)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.D)) bucket.x += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.W)) bucket.y += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.S)) bucket.y -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x -= velx * Gdx.graphics.getDeltaTime()*2;
 		   if(Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x += velx * Gdx.graphics.getDeltaTime()*2;
+		   if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y += velx * Gdx.graphics.getDeltaTime()*2;
+		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y -= velx * Gdx.graphics.getDeltaTime()*2;
 		   
 		  
 		   // que no se salga de los bordes izq y der
 		   if(bucket.x < 0) bucket.x = 0;
 		   if(bucket.x > 800 - 64) bucket.x = 800 - 64;
+		   if(bucket.y < 0) bucket.y = 0;
+		   if(bucket.y > 480 - 64) bucket.y = 480 - 64;
 	   }
 	    
 

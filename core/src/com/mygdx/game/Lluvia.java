@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class Lluvia {
-	private Array<Rectangle> rainDropsPos;
-	private Array<Integer> rainDropsType;
+	private rainDropsPos gotasPos;
+	private rainDropsType gotasTipo;
     private long lastDropTime;
     private Texture gotaBuena;
     private Texture gotaMala;
@@ -26,16 +26,16 @@ public class Lluvia {
 		dropSound = ss;
 		this.gotaBuena = gotaBuena;
 		this.gotaMala = gotaMala;
-		this.gotaMuyBuena = gotaMuyBuena;;
+		this.gotaMuyBuena = gotaMuyBuena;
+		gotasPos = new rainDropsPos();
+		gotasTipo = new rainDropsType();
 	}
 	
 	public void crear() {
-		rainDropsPos = new Array<Rectangle>();
-		rainDropsType = new Array<Integer>();
 		crearGotaDeLluvia();
-	      // start the playback of the background music immediately
-	      rainMusic.setLooping(true);
-	      rainMusic.play();
+	    // start the playback of the background music immediately
+	    rainMusic.setLooping(true);
+	    rainMusic.play();
 	}
 	
 	private void crearGotaDeLluvia() {
@@ -44,14 +44,16 @@ public class Lluvia {
 	      raindrop.y = 480;
 	      raindrop.width = 64;
 	      raindrop.height = 64;
-	      rainDropsPos.add(raindrop);
+	      gotasPos.addGota(raindrop);
 	      // ver el tipo de gota
-	      if (MathUtils.random(1,100)<50)	    	  
-	         rainDropsType.add(1);
-	      if (MathUtils.random(1,100)>25)
-	    	 rainDropsType.add(2);
-	      if (MathUtils.random(1,80) < 4)	
-	    	 rainDropsType.add(3);
+	      
+	      int numRand = MathUtils.random(1,100);
+	      if (numRand <= 60)	    	  
+	    	  gotasTipo.addGotaType(2);
+	      if (numRand > 60 &&  numRand < 98)
+	    	  gotasTipo.addGotaType(1);
+	      if (numRand >= 98)	
+	    	  gotasTipo.addGotaType(3);
 	      
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
@@ -63,34 +65,34 @@ public class Lluvia {
 	  
 	   
 	   // revisar si las gotas cayeron al suelo o chocaron con el tarro
-	   for (int i=0; i < rainDropsPos.size; i++ ) {
-		  Rectangle raindrop = rainDropsPos.get(i);
+	   for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
+		  Rectangle raindrop = gotasPos.getGota(i);
 	      raindrop.y -= 300 * Gdx.graphics.getDeltaTime();
 	      //cae al suelo y se elimina
 	      if(raindrop.y + 64 < 0) {
-	    	  rainDropsPos.removeIndex(i); 
-	    	  rainDropsType.removeIndex(i);
+	    	  gotasPos.removerGota(i); 
+	    	  gotasTipo.removerGotaType(i);
 	      }
 	      if(raindrop.overlaps(tarro.getArea())) { //la gota choca con el tarro
-	    	if(rainDropsType.get(i)==1) { // gota dañina
+	    	if(gotasTipo.getGotaType(i)==1) { // gota dañina
 	    	  tarro.sumarPuntos(-3);
 	    	  tarro.dañar();
-	    	  rainDropsPos.removeIndex(i); 
-	    	  rainDropsType.removeIndex(i);
+	    	  gotasPos.removerGota(i);  
+	    	  gotasTipo.removerGotaType(i);
 	    	  
-	      	}if(rainDropsType.get(i)==2) { // gota a recolectar
+	      	}if(gotasTipo.getGotaType(i)==2) { // gota a recolectar
 	    	  tarro.sumarPuntos(1);
 	          dropSound.play();
-	          rainDropsPos.removeIndex(i);
-	          rainDropsType.removeIndex(i);
+	          gotasPos.removerGota(i); 
+	          gotasTipo.removerGotaType(i);
 	      	}
 	      	
-	      	if(rainDropsType.get(i)==3) { // Super gota bendecida por jeováh
+	      	if(gotasTipo.getGotaType(i)==3) { // Super gota bendecida por jeováh
 		    	  tarro.sumarPuntos(5);
 		          dropSound.play();
 		          tarro.curar();
-		          rainDropsPos.removeIndex(i);
-		          rainDropsType.removeIndex(i);
+		          gotasPos.removerGota(i); 
+		          gotasTipo.removerGotaType(i);
 	      	}
 	      }
 	   }   
@@ -98,13 +100,13 @@ public class Lluvia {
    
    public void actualizarDibujoLluvia(SpriteBatch batch) { 
 	
-	  for (int i=0; i < rainDropsPos.size; i++ ) {
-		  Rectangle raindrop = rainDropsPos.get(i);
-		  if(rainDropsType.get(i)==1) // gota mala
+	  for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
+		  Rectangle raindrop = gotasPos.getGota(i);
+		  if(gotasTipo.getGotaType(i)==1) // gota mala
 	         batch.draw(gotaMala, raindrop.x, raindrop.y); 
-		  if(rainDropsType.get(i) == 2) // gota normal
+		  if(gotasTipo.getGotaType(i) == 2) // gota normal
 			 batch.draw(gotaBuena, raindrop.x, raindrop.y); 
-		  if(rainDropsType.get(i) == 3) // super gota 
+		  if(gotasTipo.getGotaType(i) == 3) // super gota 
 			 batch.draw(gotaMuyBuena, raindrop.x, raindrop.y); 
 	   }
    }
