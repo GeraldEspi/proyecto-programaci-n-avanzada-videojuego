@@ -4,18 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Tarro extends TipoTarro {
+public class Falcon extends TipoTarro {
 	  
 	  private int velx = 400;
 	  Sound healSound;
 	  
-	   public Tarro() {
+	   public Falcon() {
 		   
 		   super(new Texture(Gdx.files.internal("bucket.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.wav"));

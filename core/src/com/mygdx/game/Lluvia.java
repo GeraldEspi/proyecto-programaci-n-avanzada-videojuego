@@ -68,14 +68,15 @@ public class Lluvia implements TipoObstaculo{
 	
    public boolean actualizarMovimiento(TipoTarro tarro) { 
 	   // generar gotas de lluvia 
-	   if(TimeUtils.nanoTime() - lastDropTime > 100000000) 
+	   if(TimeUtils.nanoTime() - lastDropTime > 100500000) 
 		   crearObjetoObstaculo();
 	  
 	   
 	   // revisar si las gotas cayeron al suelo o chocaron con el tarro
 	   for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
 		  Rectangle raindrop = gotasPos.getGota(i);
-	      raindrop.y -= 300 * Gdx.graphics.getDeltaTime();
+	      raindrop.y -= 600 * Gdx.graphics.getDeltaTime();
+	      raindrop.x -= 150 * Gdx.graphics.getDeltaTime();
 	      //cae al suelo y se elimina
 	      if(raindrop.y + 32 < 0) {
 	    	  gotasPos.removerGota(i); 

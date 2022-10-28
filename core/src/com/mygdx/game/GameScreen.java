@@ -5,11 +5,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class GameScreen implements Screen {
 	final GameLluviaMenu game;
@@ -19,7 +23,9 @@ public class GameScreen implements Screen {
 	private TipoTarro tarro;
 	private TipoObstaculo obstaculo;
 	private Texture escenario;
-	private int opcion;  
+	private int opcion;
+	private Stage stage;
+	 
 	//boolean activo = true;
 
 	public GameScreen(final GameLluviaMenu game, int opcion) {
@@ -31,17 +37,34 @@ public class GameScreen implements Screen {
 	    camera = new OrthographicCamera();
 	    camera.setToOrtho(false, 1280, 720);
         batch = new SpriteBatch();
+        
         // creacion del tarro
+        
         if(opcion==1) {
-        escenario = new Texture(Gdx.files.internal("atmosfera.png"));
-        tarro = new Tarro();
+        	stage = new Stage(new ScreenViewport());
+        	 
+        	Array<Texture> textures = new Array<Texture>();
+            for(int i = 1; i <=6;i++){
+                textures.add(new Texture(Gdx.files.internal("parallax/img"+i+".png")));
+                textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+            }
+
+            ParallaxBackground parallaxBackground = new ParallaxBackground(textures);
+            parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+            parallaxBackground.setSpeed(1);
+            
+           
+        
+        stage.addActor(parallaxBackground);
+        tarro = new Falcon();
         tarro.crear();
+        
 	      
         // creacion de la lluvia
         obstaculo = new Lluvia();
         obstaculo.crear();
         }
-        else {
+        if (opcion==2) {
         escenario = new Texture(Gdx.files.internal("campo.png"));
         tarro = new Canasto();
         tarro.crear();
@@ -59,10 +82,24 @@ public class GameScreen implements Screen {
 		//actualizar matrices de la cámara
 		camera.update();
 		//actualizar 
+		
+		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
+		if(opcion == 1)
+		{
+			 Gdx.gl.glClearColor(1, 0, 0, 1);
+		        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		        stage.act();
+		        stage.draw();
+		}
+		
+		if(opcion == 2)
+		{
 		batch.draw(escenario,0,0);
+		}
+		
 		//dibujar textos
 		font.draw(batch, "Gotas totales: " + tarro.getPuntos(), 5, 650);
 		font.draw(batch, "Vidas : " + tarro.getVidas(), camera.viewportWidth/2, 650);
@@ -119,7 +156,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-	  escenario.dispose();
+	  if(opcion == 2) escenario.dispose();
       tarro.destruir();
       obstaculo.destruir();
 
