@@ -13,6 +13,7 @@ public class Tarro {
 	   private Rectangle bucket;
 	   private Texture bucketImage;
 	   private Sound sonidoHerido;
+	   private Sound sonidoHeal;
 	   private int vidas = 3;
 	   private int puntos = 0;
 	   private int velx = 400;
@@ -24,9 +25,10 @@ public class Tarro {
 
 	   //---
 	   
-	   public Tarro(Texture tex, Sound ss) {
+	   public Tarro(Texture tex, Sound ss, Sound ss2) {
 		   bucketImage = tex;
 		   sonidoHerido = ss;
+		   sonidoHeal = ss2;
 	   }
 	   
 		public int getVidas() {
@@ -58,7 +60,7 @@ public class Tarro {
 		      bucket.x = 800 / 2 - 64 / 2;
 		      bucket.y = 20;
 		      bucket.width = 25;
-		      bucket.height = 24;
+		      bucket.height = 18;
 	   }
 	   public void dañar() {
 		  vidas--;
@@ -80,10 +82,12 @@ public class Tarro {
 	   
 	   public void curar() {
 		   vidas++;
+		   sonidoHeal.play();
 	}
 	   
 	public void temporizador(){ 
 		time++;
+		
 	}
 	
 
@@ -95,15 +99,15 @@ public class Tarro {
 			      camera.unproject(touchPos);
 			      bucket.x = touchPos.x - 64 / 2;
 			}*/
-		   //movimiento desde teclado
+		   //Movimiento desde teclado Formato flechas
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.UP)) bucket.y += velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) bucket.y -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x -= velx * Gdx.graphics.getDeltaTime()*2;
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x += velx * Gdx.graphics.getDeltaTime()*2;
-		   if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y += velx * Gdx.graphics.getDeltaTime()*2;
-		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y -= velx * Gdx.graphics.getDeltaTime()*2;
+		   if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y -= velx * Gdx.graphics.getDeltaTime();
 		   
 		   // WASD format
 		   if(Gdx.input.isKeyPressed(Input.Keys.A)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
@@ -112,11 +116,16 @@ public class Tarro {
 		   if(Gdx.input.isKeyPressed(Input.Keys.S)) bucket.y -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x -= velx * Gdx.graphics.getDeltaTime()*2;
 		   if(Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.x += velx * Gdx.graphics.getDeltaTime()*2;
-		   if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y += velx * Gdx.graphics.getDeltaTime()*2;
-		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y -= velx * Gdx.graphics.getDeltaTime()*2;
+		   if(Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y += velx * Gdx.graphics.getDeltaTime();
+		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && Gdx.input.isKeyPressed(Input.Keys.SPACE) ) bucket.y -= velx * Gdx.graphics.getDeltaTime();
 		   
+		   
+		   // Habilidad especial
+		   
+		   if(Gdx.input.isKeyPressed(Input.Keys.F)) 
 		  
 		   // que no se salga de los bordes izq y der
+		   if(bucket.x > 0) bucket.x = 0;
 		   if(bucket.x < 0) bucket.x = 0;
 		   if(bucket.x > 800 - 64) bucket.x = 800 - 64;
 		   if(bucket.y < 0) bucket.y = 0;

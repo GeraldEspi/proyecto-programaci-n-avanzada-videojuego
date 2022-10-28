@@ -19,7 +19,6 @@ public class Lluvia {
     private Texture gotaMuyBuena;
     private Sound dropSound;
     private Music rainMusic;
-    private int numero;
 	   
 	public Lluvia(Texture gotaBuena, Texture gotaMala,Texture gotaMuyBuena, Sound ss, Music mm ) {
 		rainMusic = mm;
@@ -61,7 +60,7 @@ public class Lluvia {
    public void actualizarMovimiento(Tarro tarro) { 
 	   // generar gotas de lluvia 
 	   
-	   if(TimeUtils.nanoTime() - lastDropTime + (tarro.getTime())> 100000000) crearGotaDeLluvia();
+	   if(TimeUtils.nanoTime() - lastDropTime + (tarro.getTime()*100)> 100000000) crearGotaDeLluvia();
 	  
 	   
 	   // revisar si las gotas cayeron al suelo o chocaron con el tarro
@@ -75,7 +74,7 @@ public class Lluvia {
 	      }
 	      if(raindrop.overlaps(tarro.getArea())) { //la gota choca con el tarro
 	    	if(gotasTipo.getGotaType(i)==1) { // gota dañina
-	    	  tarro.sumarPuntos(-3);
+	    	  tarro.sumarPuntos(-20);
 	    	  tarro.dañar();
 	    	  gotasPos.removerGota(i);  
 	    	  gotasTipo.removerGotaType(i);
@@ -88,8 +87,8 @@ public class Lluvia {
 	      	}
 	      	
 	      	if(gotasTipo.getGotaType(i)==3) { // Super gota bendecida por jeováh
-		    	  tarro.sumarPuntos(5);
-		          dropSound.play();
+		    	  tarro.sumarPuntos(20);
+		 
 		          tarro.curar();
 		          gotasPos.removerGota(i); 
 		          gotasTipo.removerGotaType(i);
