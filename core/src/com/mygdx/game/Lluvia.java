@@ -47,21 +47,39 @@ public class Lluvia implements TipoObstaculo{
 	      Rectangle raindrop = new Rectangle();
 	      raindrop.x = MathUtils.random(0, 1280-32);
 	      raindrop.y = 720;
-	      raindrop.width = 32;
-	      raindrop.height = 32;
-	      gotasPos.addGota(raindrop);
 	      // ver el tipo de gota
 
 
 	      int numRand = MathUtils.random(1,100);
-	      if (numRand <= 60)	    	  
+	      if (numRand <= 60)
+	      {
 	    	  gotasTipo.addGotaType(2);
+	    	  raindrop.width = 32;
+		      raindrop.height = 32;
+		      gotasPos.addGota(raindrop);
+	      }
 	      if (numRand > 60 &&  numRand < 96)
+	      {
 	    	  gotasTipo.addGotaType(1);
-	      if (numRand >= 96 && numRand<=98)	
+	    	  raindrop.width = 32;
+		      raindrop.height = 32;
+		      gotasPos.addGota(raindrop);
+	      }
+	      if (numRand >= 96 && numRand<=98) 
+	      {
 	    	  gotasTipo.addGotaType(3);
-	      if (numRand >= 99)	
+	    	  raindrop.width = 32;
+		      raindrop.height = 32;
+		      gotasPos.addGota(raindrop);
+	      }	
+	      if (numRand >= 99) 
+	      {
 	    	  gotasTipo.addGotaType(4);
+	    	  raindrop.width = 64;
+	    	  raindrop.height = 76;
+	    	  gotasPos.addGota(raindrop);
+	      }	
+	      	
 	      
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
