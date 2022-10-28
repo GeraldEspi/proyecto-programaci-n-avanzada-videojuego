@@ -36,6 +36,10 @@ public class Canasto extends TipoObjetoMovi{
 		 }
 	   } 
 	   
+	   public void setVelo(int newVelo) 
+	   {
+		   this.velx = newVelo;
+	   }
 	   
 	   public void actualizarMovimiento() { 
 		   // movimiento desde mouse/touch

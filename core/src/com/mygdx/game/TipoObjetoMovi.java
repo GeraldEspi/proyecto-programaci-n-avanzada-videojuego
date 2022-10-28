@@ -36,7 +36,6 @@ public abstract class TipoObjetoMovi {
 			puntos+=pp;
 		}
 		
-	
 	   public void crear(){
 		   bucket= new Sprite(bucketImage);
 		   bucket.setCenterX(1280/2-64/2);
@@ -49,28 +48,33 @@ public abstract class TipoObjetoMovi {
 		  tiempoHerido=tiempoHeridoMax;
 		  sonidoHerido.play();
 	   }
-	   public void dañar(int a) {
+	   
+	   public void dañar(int a) 
+	   {
+
 			  vidas-=a;
 			  herido = true;
 			  tiempoHerido=tiempoHeridoMax;
 			  sonidoHerido.play();
 	   }
+	   
 	   public abstract void dibujar(SpriteBatch batch);
 	   
-	public void curar() 
-	{
-		   vidas++;  
-	}
+	   public abstract void setVelo(int velo);
 	   
-	public abstract void actualizarMovimiento();
+	   public void curar() 
+	   {
+		   vidas++;  
+	   }
+	   
+	   public abstract void actualizarMovimiento();
 	    
-
-	public void destruir() 
+	   public void destruir() 
 	{
 		    bucketImage.dispose();
 	}
 	
-	public boolean estaHerido() 
+	   public boolean estaHerido() 
 	{
 	   return herido;
 	}	   

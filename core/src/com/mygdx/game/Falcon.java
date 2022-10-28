@@ -42,9 +42,14 @@ public class Falcon extends TipoObjetoMovi {
 	   public void curar(){
 		   vidas++;
 		   sumarPuntos(20);
+		   velx = 400;
 		   healSound.play();
 	   }
 	   
+	   public void setVelo(int newVelo) 
+	   {
+		   this.velx = newVelo;
+	   }
 	   
 	   public void actualizarMovimiento() { 
 		   // movimiento desde mouse/touch

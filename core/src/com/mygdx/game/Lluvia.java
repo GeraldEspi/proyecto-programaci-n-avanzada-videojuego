@@ -106,6 +106,7 @@ public class Lluvia implements TipoObstaculo{
 	      	if(gotasTipo.getGotaType(i)==4) { // granizo
 	      		  tarro.sumarPuntos(-3);
 		    	  tarro.dañar(3);
+		    	  tarro.setVelo(200);
 		    	  if (tarro.getVidas()<=0)
 		    		 return false; // si se queda sin vidas retorna falso /game over
 		    	  gotasPos.removerGota(i);  
