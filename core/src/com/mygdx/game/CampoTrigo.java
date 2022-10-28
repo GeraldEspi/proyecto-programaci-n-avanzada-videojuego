@@ -1,7 +1,6 @@
+package com.mygdx.game;
 
-	package com.mygdx.game;
-
-	import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Gdx;
 	import com.badlogic.gdx.audio.Music;
 	import com.badlogic.gdx.audio.Sound;
 	import com.badlogic.gdx.graphics.Texture;
@@ -11,7 +10,8 @@
 	import com.badlogic.gdx.utils.Array;
 	import com.badlogic.gdx.utils.TimeUtils;
 
-	public class CampoTrigo implements TipoObstaculo{
+public class CampoTrigo implements TipoObstaculo
+{
 		private rainDropsPos avePos;
 		private rainDropsType aveTipo;
 	    private long lastDropTime;
@@ -61,7 +61,7 @@
 		      lastDropTime = TimeUtils.nanoTime();
 	    }
 		
-	   public boolean actualizarMovimiento(TipoTarro canasta) { 
+	   public boolean actualizarMovimiento(TipoObjetoMovi canasta) { 
 		   // generando objetos 
 		   if(TimeUtils.nanoTime() - lastDropTime > 100000000) 
 			   crearObjetoObstaculo();
@@ -133,7 +133,6 @@
 	   public void continuar() {
 		  cuervoSounds.play();
 	   }
-		
-	 
+ 
 }
 

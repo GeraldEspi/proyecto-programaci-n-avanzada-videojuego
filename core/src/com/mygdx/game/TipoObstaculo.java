@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public interface TipoObstaculo {
 	public void crear();
 	public void crearObjetoObstaculo();
-	public boolean actualizarMovimiento(TipoTarro tarro);
+	public boolean actualizarMovimiento(TipoObjetoMovi tarro);
 	public void actualizarDibujoObjeto(SpriteBatch batch);
 	public void destruir();
 	public void pausar();

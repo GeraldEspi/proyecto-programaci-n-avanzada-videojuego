@@ -39,8 +39,8 @@ public class Lluvia implements TipoObstaculo{
 		gotasTipo = new rainDropsType();
 		crearObjetoObstaculo();
 	      // start the playback of the background music immediately
-	      rainMusic.setLooping(true);
-	      rainMusic.play();
+	    rainMusic.setLooping(true);
+	    rainMusic.play();
 	}
 	
 	public void crearObjetoObstaculo() {
@@ -66,7 +66,7 @@ public class Lluvia implements TipoObstaculo{
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
 	
-   public boolean actualizarMovimiento(TipoTarro tarro) { 
+   public boolean actualizarMovimiento(TipoObjetoMovi tarro) { 
 	   // generar gotas de lluvia 
 	   if(TimeUtils.nanoTime() - lastDropTime > 100500000) 
 		   crearObjetoObstaculo();
@@ -143,6 +143,5 @@ public class Lluvia implements TipoObstaculo{
    public void continuar() {
 	  rainMusic.play();
    }
-	
- 
+
 }

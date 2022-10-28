@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Falcon extends TipoTarro {
+public class Falcon extends TipoObjetoMovi {
 	  
 	  private int velx = 400;
 	  Sound healSound;

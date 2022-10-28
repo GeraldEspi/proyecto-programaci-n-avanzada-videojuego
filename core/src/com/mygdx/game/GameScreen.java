@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
-	private TipoTarro tarro;
+	private TipoObjetoMovi tarro;
 	private TipoObstaculo obstaculo;
 	private Texture escenario;
 	private int opcion;

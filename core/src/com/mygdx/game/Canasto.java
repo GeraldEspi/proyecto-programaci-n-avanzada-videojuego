@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Canasto extends TipoTarro{
+public class Canasto extends TipoObjetoMovi{
 	  private int velx = 400;
 	  
 	   public Canasto() {

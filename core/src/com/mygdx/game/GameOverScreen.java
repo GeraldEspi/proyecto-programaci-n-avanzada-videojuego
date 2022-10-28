@@ -32,7 +32,7 @@ public class GameOverScreen implements Screen {
 
 		batch.begin();
 		font.draw(batch, "GAME OVER ", 200, camera.viewportWidth/2);
-		font.draw(batch, "Presiona R para reiniciar.\n Presiona S para volver al menu principal. \n Presiona F para salir.", 200, 200);
+		font.draw(batch, "Presiona R para reiniciar.\n Presiona S para volver al menu principal.\n Presiona F para salir.", 200, 200);
 		batch.end();
 
 		if (Gdx.input.isKeyPressed(Input.Keys.R)) {
