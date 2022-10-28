@@ -84,7 +84,7 @@ public class GameScreen implements Screen {
 		
 		tarro.dibujar(batch);
 		obstaculo.actualizarDibujoObjeto(batch);
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
 			pause();
 		}
 		

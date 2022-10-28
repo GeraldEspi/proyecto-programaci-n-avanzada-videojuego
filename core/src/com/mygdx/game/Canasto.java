@@ -58,9 +58,9 @@ public class Canasto extends TipoTarro{
 		   
 		   // que no se salga de los bordes izq y der
 		   if(bucket.getX() < 0) bucket.setX(0);
-		   if(bucket.getX() > 1280 - 64) bucket.setX(1280 - 64);
+		   if(bucket.getX() > 1200  - 64) bucket.setX(1200 - 64);
 		   if(bucket.getY() < 0) bucket.setY(0);
-		   if(bucket.getY() > 720 - 64) bucket.setY(720 - 64);
+		   if(bucket.getY() > 640 - 64) bucket.setY(640 - 64);
 	   }
 	   
 	   

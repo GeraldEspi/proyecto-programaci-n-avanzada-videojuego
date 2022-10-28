@@ -44,7 +44,7 @@
 		
 		public void crearObjetoObstaculo() {
 		      Rectangle raindrop = new Rectangle();
-		      raindrop.y = MathUtils.random(0, 720-64);
+		      raindrop.y = MathUtils.random(0, 640-64);
 		      raindrop.x = 1280;
 		      raindrop.width = 64;
 		      raindrop.height = 64;

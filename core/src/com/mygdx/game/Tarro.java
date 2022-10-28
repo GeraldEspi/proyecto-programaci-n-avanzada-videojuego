@@ -68,9 +68,9 @@ public class Tarro extends TipoTarro {
 		   
 		   // que no se salga de los bordes izq y der
 		   if(bucket.getX() < 0) bucket.setX(0);
-		   if(bucket.getX() > 1920 - 64) bucket.setX(1920 - 64);
+		   if(bucket.getX() > 1280  - 64) bucket.setX(1280 - 64);
 		   if(bucket.getY() < 0) bucket.setY(0);
-		   if(bucket.getY() > 1080 - 64) bucket.setY(1080 - 64);
+		   if(bucket.getY() > 640 - 64) bucket.setY(640 - 64);
 	   }
 	   
 }
