@@ -82,15 +82,16 @@ public class CampoPeces implements TipoObstaculo
 			  
 		     
 			 
-		       raindrop.x -= 300 * Gdx.graphics.getDeltaTime();
+		       
 		      
 		   
 				  
 		      
 		      //Movimiento en eje y de los cuervos, va aumentando segun el coefMov
 		      if(fishTipo.getActorTipo(i)==1)
-		    	  raindrop.y+=MathUtils.random(-player.puntos*2,player.puntos*2)* Gdx.graphics.getDeltaTime();
+		    	  {raindrop.y+=MathUtils.random(-player.puntos*2,player.puntos*2)* Gdx.graphics.getDeltaTime();   raindrop.x -= 310 * Gdx.graphics.getDeltaTime();}
 		      
+		      raindrop.x -= 300 * Gdx.graphics.getDeltaTime();
 		      //
 		      if(fishTipo.getActorTipo(i)==3)
 		    	  raindrop.y+=MathUtils.random(-700,700)* (Gdx.graphics.getDeltaTime());
@@ -109,7 +110,7 @@ public class CampoPeces implements TipoObstaculo
 		    	  fishPos.removeActor(i);  
 		    	  fishTipo.removeActorTipo(i);
 		      	}
-		    	if(fishTipo.getActorTipo(i)==2) { // trigo
+		    	if(fishTipo.getActorTipo(i)==2) { //alga
 		    	  player.sumarPuntos(1);
 		          getItemSound.play();
 		          fishPos.removeActor(i);  
@@ -132,11 +133,11 @@ public class CampoPeces implements TipoObstaculo
 		   
 		  for (int i=0; i < fishPos.getSizeArray(); i++ ) {
 			  Rectangle raindrop = fishPos.getActor(i);
-			  if(fishTipo.getActorTipo(i)==1) // gota dañina
+			  if(fishTipo.getActorTipo(i)==1) // pez dañino
 		         batch.draw(pezTiburon, raindrop.x, raindrop.y); 
-			  if(fishTipo.getActorTipo(i)==2)
+			  if(fishTipo.getActorTipo(i)==2) // alga comida
 				 batch.draw(alga, raindrop.x, raindrop.y); 
-			  if(fishTipo.getActorTipo(i)==3)
+			  if(fishTipo.getActorTipo(i)==3) // pez comida curador
 				 batch.draw(pezBueno, raindrop.x, raindrop.y);
 		   }
 	   }

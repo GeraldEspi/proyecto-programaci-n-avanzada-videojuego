@@ -38,9 +38,9 @@ public class GameScreen implements Screen {
 	    camera.setToOrtho(false, 1280, 720);
         batch = new SpriteBatch();
         
-        // creacion del tarro
         
-        if(opcion==1) {
+        
+        if(opcion==1) { // Se carga el cielo 
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
         obstaculo.crear();
         }
         
-        if (opcion==2) {
+        if (opcion==2) { // Opción 2 se carga el mar
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
         player = new Anguila();
         player.crear();
     	      
-        // creacion de la lluvia
+        // creacion del campo de peces
         obstaculo = new CampoPeces();
         obstaculo.crear();
         }
@@ -117,7 +117,7 @@ public class GameScreen implements Screen {
 		font.draw(batch, "Gotas totales: " + player.getPuntos(), 5, 700);
 		font.draw(batch, "Vidas : " + player.getVidas(), (camera.viewportWidth/2)+1, 700);
 		font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth-250, 700);
-		
+		//_------------------------------------------------------------------------
 		//----------------------------- ver herido
 		if (!player.estaHerido()) {
 			// movimiento del tarro desde teclado
