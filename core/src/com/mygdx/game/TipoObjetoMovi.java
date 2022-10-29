@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,8 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public abstract class TipoObjetoMovi {
 	
-	protected Sprite bucket;
-	   protected Texture bucketImage;
+	   protected Sprite player;
+	   protected Texture playerSkin;
 	   protected Sound sonidoHerido;
 	   protected int vidas = 3;
 	   protected int puntos = 0;
@@ -19,7 +18,7 @@ public abstract class TipoObjetoMovi {
 	   protected int tiempoHerido;
 	   
 	   public TipoObjetoMovi(Texture tex, Sound ss) {
-		   bucketImage = tex;
+		   playerSkin = tex;
 		   sonidoHerido = ss;
 	   }
 	   
@@ -37,9 +36,9 @@ public abstract class TipoObjetoMovi {
 		}
 		
 	   public void crear(){
-		   bucket= new Sprite(bucketImage);
-		   bucket.setCenterX(1280/2-64/2);
-		   bucket.setY(720/2);
+		   player= new Sprite(playerSkin);
+		   player.setCenterX(1280/2-64/2);
+		   player.setY(720/2);
 	   }
 	   
 	   public void dañar() {
@@ -71,11 +70,12 @@ public abstract class TipoObjetoMovi {
 	    
 	   public void destruir() 
 	{
-		    bucketImage.dispose();
+		    playerSkin.dispose();
 	}
 	
 	   public boolean estaHerido() 
 	{
 	   return herido;
 	}	   
+	   
 }

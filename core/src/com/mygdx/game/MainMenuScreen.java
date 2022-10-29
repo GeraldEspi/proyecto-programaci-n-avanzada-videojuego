@@ -34,8 +34,8 @@ public class MainMenuScreen implements Screen {
 
 		batch.begin();
 		font.getData().setScale(1, 1);
-		font.draw(batch, "Bienvenido gather to survive!!! ", 100, camera.viewportHeight/2+50);
-		font.draw(batch, "Selecciona lo que quieres recolectar\n 1. Lluvia en la atmosfera\n 2. Trigo vs los cuervos\n ESC. Cerrar juego", 100, camera.viewportHeight/2-50);
+		font.draw(batch, "Bienvenido  Gather Matter!!! ", 100, camera.viewportHeight/2+50);
+		font.draw(batch, "Selecciona lo que quieres recolectar\n 1. Lluvia con Falcon \n 2. Trigo vs los cuervos\n ESC. Cerrar juego", 100, camera.viewportHeight/2-50);
 
 		batch.end();
 

@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -7,24 +8,26 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class Lluvia implements TipoObstaculo{
-	private rainDropsPos gotasPos;
-	private rainDropsType gotasTipo;
+	private ActorPos gotasPos;
+	private ActorTipo gotasTipo;
     private long lastDropTime;
     private Texture gotaBuena;
     private Texture gotaMala;
     private Texture gotaMuyBuena;
     private Texture granizo;
-    private Sound dropSound;
+    long seconds;
+    private Sound getItemSound;
     private Music rainMusic;
+   
+    
     
 	   
 	public Lluvia() {
 		
-		dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
+		getItemSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
         
 		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
         
@@ -35,8 +38,8 @@ public class Lluvia implements TipoObstaculo{
 	}
 	
 	public void crear() {
-		gotasPos = new rainDropsPos();
-		gotasTipo = new rainDropsType();
+		gotasPos = new ActorPos();
+		gotasTipo = new ActorTipo();
 		crearObjetoObstaculo();
 	      // start the playback of the background music immediately
 	    rainMusic.setLooping(true);
@@ -45,7 +48,7 @@ public class Lluvia implements TipoObstaculo{
 	
 	public void crearObjetoObstaculo() {
 	      Rectangle raindrop = new Rectangle();
-	      raindrop.x = MathUtils.random(0, 1280-32);
+	      raindrop.x = MathUtils.random(0, 1580-32);
 	      raindrop.y = 720;
 	      // ver el tipo de gota
 
@@ -53,82 +56,86 @@ public class Lluvia implements TipoObstaculo{
 	      int numRand = MathUtils.random(1,100);
 	      if (numRand <= 60)
 	      {
-	    	  gotasTipo.addGotaType(2);
+	    	  gotasTipo.addActorTipo(2);
 	    	  raindrop.width = 32;
 		      raindrop.height = 32;
-		      gotasPos.addGota(raindrop);
+		      gotasPos.addActor(raindrop);
 	      }
 	      if (numRand > 60 &&  numRand < 96)
 	      {
-	    	  gotasTipo.addGotaType(1);
+	    	  gotasTipo.addActorTipo(1);
 	    	  raindrop.width = 32;
 		      raindrop.height = 32;
-		      gotasPos.addGota(raindrop);
+		      gotasPos.addActor(raindrop);
 	      }
 	      if (numRand >= 96 && numRand<=98) 
 	      {
-	    	  gotasTipo.addGotaType(3);
+	    	  gotasTipo.addActorTipo(3);
 	    	  raindrop.width = 32;
 		      raindrop.height = 32;
-		      gotasPos.addGota(raindrop);
+		      gotasPos.addActor(raindrop);
 	      }	
 	      if (numRand >= 99) 
 	      {
-	    	  gotasTipo.addGotaType(4);
+	    	  gotasTipo.addActorTipo(4);
 	    	  raindrop.width = 64;
 	    	  raindrop.height = 76;
-	    	  gotasPos.addGota(raindrop);
+	    	  gotasPos.addActor(raindrop);
 	      }	
 	      	
 	      
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
 	
-   public boolean actualizarMovimiento(TipoObjetoMovi tarro) { 
+   public boolean actualizarMovimiento(TipoObjetoMovi player) { 
 	   // generar gotas de lluvia 
-	   if(TimeUtils.nanoTime() - lastDropTime > 100500000) 
+	
+	   
+	   if(TimeUtils.nanoTime() - lastDropTime > 100000000-10000000) 
 		   crearObjetoObstaculo();
+	   
 	  
 	   
-	   // revisar si las gotas cayeron al suelo o chocaron con el tarro
+	   // revisar si las gotas cayeron al suelo o chocaron con el faclon
 	   for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
-		  Rectangle raindrop = gotasPos.getGota(i);
+		  Rectangle raindrop = gotasPos.getActor(i);
 	      raindrop.y -= 600 * Gdx.graphics.getDeltaTime();
-	      raindrop.x -= 150 * Gdx.graphics.getDeltaTime();
+	      raindrop.x -= 200 * Gdx.graphics.getDeltaTime();
 	      //cae al suelo y se elimina
 	      if(raindrop.y + 32 < 0) {
-	    	  gotasPos.removerGota(i); 
-	    	  gotasTipo.removerGotaType(i);
+	    	  gotasPos.removeActor(i); 
+	    	  gotasTipo.removeActorTipo(i);
 	      }
-	      if(raindrop.overlaps(tarro.getArea())) { //la gota choca con el tarro
-	    	if(gotasTipo.getGotaType(i)==1) { // gota dañina
-	    	  tarro.sumarPuntos(-3);
-	    	  tarro.dañar();
-	    	  if (tarro.getVidas()<=0)
+	      if(raindrop.overlaps(player.getArea())) { //la gota choca con el faclon
+	    	if(gotasTipo.getActorTipo(i)==1) { // gota dañina
+	    	  player.sumarPuntos(-20);
+	    	  player.dañar();
+	    	  if (player.getVidas()<=0)
 	    		 return false; // si se queda sin vidas retorna falso /game over
-	    	  gotasPos.removerGota(i);  
-	    	  gotasTipo.removerGotaType(i);
+	    	  gotasPos.removeActor(i);  
+	    	  gotasTipo.removeActorTipo(i);
 	      	}
-	    	if(gotasTipo.getGotaType(i)==2){ // gota a recolectar
-	    	  tarro.sumarPuntos(1);
-	          dropSound.play();
-	          gotasPos.removerGota(i); 
-	          gotasTipo.removerGotaType(i);
+	    	if(gotasTipo.getActorTipo(i)==2){ // gota a recolectar
+	    	  player.sumarPuntos(1);
+	          getItemSound.play();
+	          gotasPos.removeActor(i); 
+	          gotasTipo.removeActorTipo(i);
 	      	}
-	    	if(gotasTipo.getGotaType(i)==3){ // Super gota bendecida por jeováh
-		          tarro.curar();
-		          gotasPos.removerGota(i); 
-		          gotasTipo.removerGotaType(i);
+	    	if(gotasTipo.getActorTipo(i)==3){ // Super gota bendecida por jeováh
+	    		  player.sumarPuntos(20);
+		          player.curar();
+		          gotasPos.removeActor(i); 
+		          gotasTipo.removeActorTipo(i);
 	      	}
 	      	
-	      	if(gotasTipo.getGotaType(i)==4) { // granizo
-	      		  tarro.sumarPuntos(-3);
-		    	  tarro.dañar(3);
-		    	  tarro.setVelo(200);
-		    	  if (tarro.getVidas()<=0)
+	      	if(gotasTipo.getActorTipo(i)==4) { // granizo
+		    	  player.dañar(3);
+		    	  player.setVelo(200);
+		  
+		    	  if (player.getVidas()<=0)
 		    		 return false; // si se queda sin vidas retorna falso /game over
-		    	  gotasPos.removerGota(i);  
-		    	  gotasTipo.removerGotaType(i);
+		    	  gotasPos.removeActor(i);  
+		    	  gotasTipo.removeActorTipo(i);
 		          
 	      	}
 	      	
@@ -138,22 +145,28 @@ public class Lluvia implements TipoObstaculo{
 	  return true; 
    }
    
+   
+	
+		//put here code to format and display the values
+		
+
+   
    public void actualizarDibujoObjeto(SpriteBatch batch) { 
 	   
 	  for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
-		  Rectangle raindrop = gotasPos.getGota(i);
-		  if(gotasTipo.getGotaType(i)==1) // gota mala
+		  Rectangle raindrop = gotasPos.getActor(i);
+		  if(gotasTipo.getActorTipo(i)==1) // gota mala
 	         batch.draw(gotaMala, raindrop.x, raindrop.y); 
-		  if(gotasTipo.getGotaType(i) == 2) // gota normal
+		  if(gotasTipo.getActorTipo(i) == 2) // gota normal
 			 batch.draw(gotaBuena, raindrop.x, raindrop.y); 
-		  if(gotasTipo.getGotaType(i) == 3) // super gota 
+		  if(gotasTipo.getActorTipo(i) == 3) // super gota 
 			 batch.draw(gotaMuyBuena, raindrop.x, raindrop.y); 
-		  if(gotasTipo.getGotaType(i) == 4) // super gota 
+		  if(gotasTipo.getActorTipo(i) == 4) // super gota 
 			 batch.draw(granizo, raindrop.x, raindrop.y);
 	   }
    }
    public void destruir() {
-      dropSound.dispose();
+      getItemSound.dispose();
       rainMusic.dispose();
    }
    public void pausar() {

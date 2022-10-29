@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,9 +21,8 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
-	private TipoObjetoMovi tarro;
+	private TipoObjetoMovi player;
 	private TipoObstaculo obstaculo;
-	private Texture escenario;
 	private int opcion;
 	private Stage stage;
 	 
@@ -42,6 +42,7 @@ public class GameScreen implements Screen {
         
         if(opcion==1) {
         	stage = new Stage(new ScreenViewport());
+        	font.setColor(Color.BLACK); // color setteado
         	 
         	Array<Texture> textures = new Array<Texture>();
             for(int i = 1; i <=6;i++){
@@ -56,21 +57,39 @@ public class GameScreen implements Screen {
            
         
         stage.addActor(parallaxBackground);
-        tarro = new Falcon();
-        tarro.crear();
+        player = new Falcon();
+        player.crear();
         
 	      
         // creacion de la lluvia
         obstaculo = new Lluvia();
         obstaculo.crear();
         }
+        
         if (opcion==2) {
-        escenario = new Texture(Gdx.files.internal("campo.png"));
-        tarro = new Canasto();
-        tarro.crear();
+        	stage = new Stage(new ScreenViewport());
+        	font.setColor(Color.BLACK); // color setteado
+        	 
+        	player = new Anguila();
+            player.crear();
+            
+        	Array<Texture> textures = new Array<Texture>();
+            for(int i = 1; i <=4;i++){
+                textures.add(new Texture(Gdx.files.internal("seaBackparallax/img"+i+".png")));
+                textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+            }
+
+            ParallaxBackground parallaxBackground = new ParallaxBackground(textures);
+            parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+            parallaxBackground.setSpeed(1);
+            
+            
+        stage.addActor(parallaxBackground);
+        player = new Anguila();
+        player.crear();
     	      
         // creacion de la lluvia
-        obstaculo = new CampoTrigo();
+        obstaculo = new CampoPeces();
         obstaculo.crear();
         }
 	}
@@ -87,44 +106,37 @@ public class GameScreen implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
-		if(opcion == 1)
-		{
-			 Gdx.gl.glClearColor(1, 0, 0, 1);
-		        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		        stage.act();
-		        stage.draw();
-		}
 		
-		if(opcion == 2)
-		{
-		batch.draw(escenario,0,0);
-		}
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.act();
+		stage.draw();
+
 		
 		//dibujar textos
-		font.draw(batch, "Gotas totales: " + tarro.getPuntos(), 5, 650);
-		font.draw(batch, "Vidas : " + tarro.getVidas(), camera.viewportWidth/2, 650);
-		font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth-250, 650);
+		font.draw(batch, "Gotas totales: " + player.getPuntos(), 5, 700);
+		font.draw(batch, "Vidas : " + player.getVidas(), (camera.viewportWidth/2)+1, 700);
+		font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth-250, 700);
 		
-		if (!tarro.estaHerido()) {
+		//----------------------------- ver herido
+		if (!player.estaHerido()) {
 			// movimiento del tarro desde teclado
-	        tarro.actualizarMovimiento();        
+	        player.actualizarMovimiento();        
 			// caida de la lluvia 
-	       if (!obstaculo.actualizarMovimiento(tarro)) {
+	       if (!obstaculo.actualizarMovimiento(player)) {
 	    	  //actualizar HigherScore
-	    	  if (game.getHigherScore()<tarro.getPuntos())
-	    		  game.setHigherScore(tarro.getPuntos());  
+	    	  if (game.getHigherScore()<player.getPuntos())
+	    		  game.setHigherScore(player.getPuntos());  
 	    	  //ir a la ventana de finde juego y destruir la actual
 	    	  game.setScreen(new GameOverScreen(game,opcion));
 	    	  dispose();
 	       }
 		}
+		//-------------------------------------------
 		
-		tarro.dibujar(batch);
+		player.dibujar(batch);
 		obstaculo.actualizarDibujoObjeto(batch);
-		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-			pause();
-		}
-		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){pause();} // Pause
 		batch.end();
 	}
 
@@ -156,8 +168,8 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-	  if(opcion == 2) escenario.dispose();
-      tarro.destruir();
+	  stage.dispose();
+      player.destruir();
       obstaculo.destruir();
 
 	}

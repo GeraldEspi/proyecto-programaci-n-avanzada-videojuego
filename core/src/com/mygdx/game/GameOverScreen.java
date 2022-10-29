@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,16 +23,19 @@ public class GameOverScreen implements Screen {
         this.opcion=opcion;
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
+		
 	}
 
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
+		font.setColor(Color.RED);
+		
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
-		font.draw(batch, "GAME OVER ", 200, camera.viewportWidth/2);
+		font.draw(batch, "GAME OVER", 200, camera.viewportWidth/2);
 		font.draw(batch, "Presiona R para reiniciar.\n Presiona S para volver al menu principal.\n Presiona F para salir.", 200, 200);
 		batch.end();
 
@@ -40,7 +44,9 @@ public class GameOverScreen implements Screen {
 			dispose();
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+			font.setColor(Color.WHITE);
 			game.setScreen(new MainMenuScreen(game));
+			
 			dispose();
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.F)) {
