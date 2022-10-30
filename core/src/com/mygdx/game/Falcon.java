@@ -41,7 +41,6 @@ public class Falcon extends TipoObjetoMovi {
 	   @Override
 	  public void curar(){
 		   vidas++;
-		   sumarPuntos(20);
 		   velx = 400;
 		   healSound.play();
 	   }

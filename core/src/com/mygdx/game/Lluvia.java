@@ -126,7 +126,7 @@ public class Lluvia implements TipoObstaculo{
 	      	}
 	      	
 	      	if(gotasTipo.getActorTipo(i)==4) { // granizo
-		    	  player.dañar(3);
+		    	  player.dañar(2);
 		    	  player.setVelo(200);
 		  
 		    	  if (player.getVidas()<=0)
