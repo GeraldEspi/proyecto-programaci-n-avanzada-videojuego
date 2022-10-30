@@ -49,7 +49,7 @@ public class CampoPeces implements TipoObstaculo
 		public void crearObjetoObstaculo() {
 		      Rectangle raindrop = new Rectangle();
 		      
-		      raindrop.y = MathUtils.random(0, 640-64);
+		      raindrop.y = MathUtils.random(0, 700-64);
 		      
 		     
 		      raindrop.x = 1280;
@@ -80,24 +80,33 @@ public class CampoPeces implements TipoObstaculo
 			  Rectangle raindrop = fishPos.getActor(i);
 			  
 			  
-		     
-			 
-		       
-		      
-		   
-				  
-		      
-		      //Movimiento en eje y de los cuervos, va aumentando segun el coefMov
+		 
+		      //Movimiento en eje y de los pezTiburon, va aumentando segun el coefMov
 		      if(fishTipo.getActorTipo(i)==1)
-		    	  {raindrop.y+=MathUtils.random(-player.puntos*2,player.puntos*2)* Gdx.graphics.getDeltaTime();   raindrop.x -= 310 * Gdx.graphics.getDeltaTime();}
+		    	  { raindrop.y+=MathUtils.random(-player.puntos*2,player.puntos*2)* Gdx.graphics.getDeltaTime();  raindrop.x -= 310 * Gdx.graphics.getDeltaTime();  }
 		      
-		      raindrop.x -= 300 * Gdx.graphics.getDeltaTime();
-		      //
+		     
+		     // Objeto tipo pez curador  	  
 		      if(fishTipo.getActorTipo(i)==3)
-		    	  raindrop.y+=MathUtils.random(-700,700)* (Gdx.graphics.getDeltaTime());
+		    	 
+		    	  raindrop.x -= MathUtils.random(290,295) * Gdx.graphics.getDeltaTime();
+		      
+		      // Alga va cayendo poco a poco al fondo marino
+		      	
+		      raindrop.x -= 300 * Gdx.graphics.getDeltaTime();
+		      
+		      	if(fishTipo.getActorTipo(i)==2)
+			    	 
+		       	  raindrop.y -= 10 * (Gdx.graphics.getDeltaTime()); 
+		       	 
+		      
+	    	  
 		      
 		      
-		      //cae al suelo y se elimina
+		    	 
+		      
+		      
+		      //sale de visión y se elimina
 		      if(raindrop.x + 64 < 0) {
 		    	  fishPos.removeActor(i); 
 		    	  fishTipo.removeActorTipo(i);
@@ -116,7 +125,7 @@ public class CampoPeces implements TipoObstaculo
 		          fishPos.removeActor(i);  
 		    	  fishTipo.removeActorTipo(i);
 		      	}
-		    	else {
+		    	if(fishTipo.getActorTipo(i)==3) {
 		    		player.curar();
 		    		healSound.play();
 		    		eatSound.play();

@@ -25,6 +25,7 @@ public class GameScreen implements Screen {
 	private TipoObstaculo obstaculo;
 	private int opcion;
 	private Stage stage;
+	ParallaxBackground parallaxBackground;
 	 
 	//boolean activo = true;
 
@@ -50,7 +51,7 @@ public class GameScreen implements Screen {
                 textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
             }
 
-            ParallaxBackground parallaxBackground = new ParallaxBackground(textures);
+            parallaxBackground = new ParallaxBackground(textures);
             parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             parallaxBackground.setSpeed(1);
             
@@ -79,9 +80,11 @@ public class GameScreen implements Screen {
                 textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
             }
 
-            ParallaxBackground parallaxBackground = new ParallaxBackground(textures);
+            parallaxBackground = new ParallaxBackground(textures);
             parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             parallaxBackground.setSpeed(1);
+            
+          
             
             
         stage.addActor(parallaxBackground);
@@ -121,6 +124,7 @@ public class GameScreen implements Screen {
 		//----------------------------- ver herido
 		if (!player.estaHerido()) {
 			// movimiento del tarro desde teclado
+			
 	        player.actualizarMovimiento();        
 			// caida de la lluvia 
 	       if (!obstaculo.actualizarMovimiento(player)) {
