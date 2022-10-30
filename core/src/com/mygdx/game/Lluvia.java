@@ -107,6 +107,7 @@ public class Lluvia implements TipoObstaculo{
 	    	if(gotasTipo.getActorTipo(i)==1) { // gota dañina
 	    	  player.sumarPuntos(-20);
 	    	  player.dañar();
+	    	  if(player.getPuntos()<=0) player.setPuntos(0);
 	    	  if (player.getVidas()<=0)
 	    		 return false; // si se queda sin vidas retorna falso /game over
 	    	  gotasPos.removeActor(i);  

@@ -29,11 +29,17 @@ public abstract class TipoObjetoMovi {
 		public int getPuntos() {
 			return puntos;
 		}
+		
+		public void setPuntos(int pts) {
+			puntos=pts;
+		}
+		
 		public abstract Rectangle getArea();
 		
 		public void sumarPuntos(int pp) {
 			puntos+=pp;
 		}
+		
 		
 	   public void crear(){
 		   player= new Sprite(playerSkin);
