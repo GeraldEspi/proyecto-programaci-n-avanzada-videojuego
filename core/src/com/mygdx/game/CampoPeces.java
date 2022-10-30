@@ -23,10 +23,7 @@ public class CampoPeces implements TipoObstaculo
 	    private Sound healSound;
 	    private Sound eatSound;
 	    
-	   
-	   
-		   
-		public CampoPeces() {
+	    public CampoPeces() {
 			
 			getItemSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 			eatSound =  Gdx.audio.newSound(Gdx.files.internal("queRico.mp3"));
@@ -69,7 +66,7 @@ public class CampoPeces implements TipoObstaculo
 		      lastDropTime = TimeUtils.nanoTime();
 	    }
 		
-	   public boolean actualizarMovimiento(TipoObjetoMovi player) { 
+		public boolean actualizarMovimiento(TipoObjetoMovi player) { 
 		   // generando objetos 
 		   if(TimeUtils.nanoTime() - lastDropTime > 100000000) 
 			   crearObjetoObstaculo();
@@ -138,7 +135,7 @@ public class CampoPeces implements TipoObstaculo
 		  return true; 
 	   }
 	   
-	   public void actualizarDibujoObjeto(SpriteBatch batch) { 
+		public void actualizarDibujoObjeto(SpriteBatch batch) { 
 		   
 		  for (int i=0; i < fishPos.getSizeArray(); i++ ) {
 			  Rectangle raindrop = fishPos.getActor(i);
@@ -150,16 +147,19 @@ public class CampoPeces implements TipoObstaculo
 				 batch.draw(pezBueno, raindrop.x, raindrop.y);
 		   }
 	   }
-	   public void destruir() {
+	   
+		public void destruir() {
 	      getItemSound.dispose();
 	      debajoDelMar.dispose();
 	   }
-	   public void pausar() {
+	   
+		public void pausar() {
 		  debajoDelMar.stop();
 	   }
-	   public void continuar() {
+	   
+		public void continuar() {
 		  debajoDelMar.play();
 	   }
- 
+
 }
 

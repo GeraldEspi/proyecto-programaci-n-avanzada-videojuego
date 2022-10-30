@@ -14,18 +14,17 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class Anguila extends TipoObjetoMovi{
 	  private int velx = 400;
 	  
-	   public Anguila() {
+	  public Anguila() {
 		   
 		   super(new Texture(Gdx.files.internal("anguila.png")),
 				   Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 	   }
 	   
-		public Rectangle getArea(){
+	  public Rectangle getArea(){
 			return player.getBoundingRectangle();
 		}
 		
-
-	   public void dibujar(SpriteBatch batch) {
+	  public void dibujar(SpriteBatch batch) {
 		 if (!herido)  
 		   player.draw(batch);
 		 else {
@@ -37,12 +36,12 @@ public class Anguila extends TipoObjetoMovi{
 		 }
 	   } 
 	   
-	   public void setVelo(int newVelo) 
+	  public void setVelo(int newVelo) 
 	   {
 		   this.velx = newVelo;
 	   }
 	   
-	   public void actualizarMovimiento() { 
+	  public void actualizarMovimiento() { 
 		   // movimiento desde mouse/touch
 		   /*if(Gdx.input.isTouched()) {
 			      Vector3 touchPos = new Vector3();

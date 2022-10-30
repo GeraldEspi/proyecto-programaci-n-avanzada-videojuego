@@ -12,9 +12,9 @@ public class ActorPos {
 		actorPosArray = new Array<Rectangle>();
 	}
 	
-	public void addActor(Rectangle raidDrop) 
+	public void addActor(Rectangle actor) 
 	{
-		actorPosArray.add(raidDrop);
+		actorPosArray.add(actor);
 	}
 	
 	public int getSizeArray() 

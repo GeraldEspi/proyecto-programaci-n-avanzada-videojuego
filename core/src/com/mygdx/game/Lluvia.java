@@ -18,13 +18,10 @@ public class Lluvia implements TipoObstaculo{
     private Texture gotaMala;
     private Texture gotaMuyBuena;
     private Texture granizo;
-    long seconds;
+    private long seconds;//se usara despues
     private Sound getItemSound;
     private Music rainMusic;
    
-    
-    
-	   
 	public Lluvia() {
 		
 		getItemSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
@@ -87,7 +84,7 @@ public class Lluvia implements TipoObstaculo{
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
 	
-   public boolean actualizarMovimiento(TipoObjetoMovi player) { 
+	public boolean actualizarMovimiento(TipoObjetoMovi player) { 
 	   // generar gotas de lluvia 
 	
 	   
@@ -145,13 +142,7 @@ public class Lluvia implements TipoObstaculo{
 	  return true; 
    }
    
-   
-	
-		//put here code to format and display the values
-		
-
-   
-   public void actualizarDibujoObjeto(SpriteBatch batch) { 
+	public void actualizarDibujoObjeto(SpriteBatch batch) { 
 	   
 	  for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
 		  Rectangle raindrop = gotasPos.getActor(i);
@@ -165,14 +156,17 @@ public class Lluvia implements TipoObstaculo{
 			 batch.draw(granizo, raindrop.x, raindrop.y);
 	   }
    }
-   public void destruir() {
+	
+	public void destruir() {
       getItemSound.dispose();
       rainMusic.dispose();
    }
-   public void pausar() {
+   
+	public void pausar() {
 	  rainMusic.stop();
    }
-   public void continuar() {
+   
+	public void continuar() {
 	  rainMusic.play();
    }
 

@@ -14,25 +14,19 @@ public class Falcon extends TipoObjetoMovi {
 	  
 	  private int velx = 400;
 	  Sound healSound;
-	  
-	  public Date lastGathered;
 
-	  
-	   public Falcon() {
+	  public Falcon() {
 		   
 		   super(new Texture(Gdx.files.internal("falcon.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   
-		   
-		   
 	   }
 	   
-		public Rectangle getArea(){
+	  public Rectangle getArea(){
 			return player.getBoundingRectangle();
 		}
 		
-
-	   public void dibujar(SpriteBatch batch) {
+	  public void dibujar(SpriteBatch batch) {
 		 if (!herido)  
 		   player.draw(batch);
 		 else {
@@ -45,24 +39,19 @@ public class Falcon extends TipoObjetoMovi {
 	   } 
 	   
 	   @Override
-	   public void curar(){
+	  public void curar(){
 		   vidas++;
 		   sumarPuntos(20);
 		   velx = 400;
 		   healSound.play();
 	   }
 	   
-	   public void setVelo(int newVelo) 
+	  public void setVelo(int newVelo) 
 	   {
 		   this.velx = newVelo;
 	   }
-	   
-	   
-	   
-	
-		   
-	 
-	   public void actualizarMovimiento()  { 
+ 
+	  public void actualizarMovimiento()  { 
 		   // movimiento desde mouse/touch
 		   /*if(Gdx.input.isTouched()) {
 			      Vector3 touchPos = new Vector3();

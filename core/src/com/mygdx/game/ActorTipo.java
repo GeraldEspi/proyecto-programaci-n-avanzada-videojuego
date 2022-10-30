@@ -5,31 +5,31 @@ import com.badlogic.gdx.utils.Array;
 
 public class ActorTipo {
 	
-	private Array<Integer> rainType;
+	private Array<Integer> actorType;
 	
 	public ActorTipo() 
 	{
-		rainType = new Array<Integer>();
+		actorType = new Array<Integer>();
 	}
 	
 	public void addActorTipo(int type) 
 	{
-		rainType.add(type);
+		actorType.add(type);
 	}
 	
 	public int getSizeArray() 
 	{
-		return rainType.size;
+		return actorType.size;
 	}
 	
 	public int getActorTipo(int i) 
 	{
-		return rainType.get(i);
+		return actorType.get(i);
 	}
 	
 	public void removeActorTipo(int i) 
 	{
-		rainType.removeIndex(i);
+		actorType.removeIndex(i);
 	}
 
 }
