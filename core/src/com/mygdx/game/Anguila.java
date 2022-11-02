@@ -1,23 +1,24 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class Anguila extends TipoObjetoMovi{
 	  private int velx = 400;
 	  
+	  
+	  
 	  public Anguila() {
+		  
 		   
 		   super(new Texture(Gdx.files.internal("anguila.png")),
 				   Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		 
 	   }
 	   
 	  public Rectangle getArea(){
@@ -25,14 +26,18 @@ public class Anguila extends TipoObjetoMovi{
 		}
 		
 	  public void dibujar(SpriteBatch batch) {
-		 if (!herido)  
-		   player.draw(batch);
+		 
+		if (!herido)  
+		   {player.draw(batch); 
+		  
+		   }
+		   
 		 else {
 		
-		   player.setX(player.getX()+MathUtils.random(-5,5));
+		   player.setX(player.getX()+MathUtils.random(-5,5));  
 		   player.draw(batch);
 		   tiempoHerido--;
-		   if (tiempoHerido<=0) herido = false;
+		   if (tiempoHerido<=0) herido = false; 
 		 }
 	   } 
 	   

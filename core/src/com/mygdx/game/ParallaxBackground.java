@@ -39,7 +39,8 @@
 		public void setSpeed(int newSpeed){
 			this.speed = newSpeed;
 		}
-
+		
+	
 
 		@Override
 		public void draw(Batch batch, float parentAlpha) {

@@ -25,6 +25,7 @@ public class GameScreen implements Screen {
 	private TipoObstaculo obstaculo;
 	private int opcion;
 	private Stage stage;
+
 	ParallaxBackground parallaxBackground;
 	 
 	//boolean activo = true;
@@ -56,7 +57,6 @@ public class GameScreen implements Screen {
             parallaxBackground.setSpeed(1);
             
            
-        
         stage.addActor(parallaxBackground);
         player = new Falcon();
         player.crear();
@@ -86,10 +86,10 @@ public class GameScreen implements Screen {
             
           
             
-            
         stage.addActor(parallaxBackground);
         player = new Anguila();
         player.crear();
+   
     	      
         // creacion del campo de peces
         obstaculo = new CampoPeces();
@@ -124,7 +124,7 @@ public class GameScreen implements Screen {
 		//----------------------------- ver herido
 		if (!player.estaHerido()) {
 			// movimiento del tarro desde teclado
-			
+			parallaxBackground.setSpeed(1);
 	        player.actualizarMovimiento();        
 			// caida de la lluvia 
 	       if (!obstaculo.actualizarMovimiento(player)) {
@@ -136,6 +136,8 @@ public class GameScreen implements Screen {
 	    	  dispose();
 	       }
 		}
+		
+		if((player.estaHerido())) parallaxBackground.setSpeed(0);
 		//-------------------------------------------
 		
 		player.dibujar(batch);
