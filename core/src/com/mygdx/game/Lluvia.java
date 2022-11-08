@@ -51,21 +51,21 @@ public class Lluvia implements TipoObstaculo{
 
 
 	      int numRand = MathUtils.random(1,100);
-	      if (numRand <= 60)
+	      if (numRand <= 80)
 	      {
 	    	  gotasTipo.addActorTipo(2);
 	    	  raindrop.width = 32;
 		      raindrop.height = 32;
 		      gotasPos.addActor(raindrop);
 	      }
-	      if (numRand > 60 &&  numRand < 96)
+	      if (numRand > 80 &&  numRand < 97)
 	      {
 	    	  gotasTipo.addActorTipo(1);
 	    	  raindrop.width = 32;
 		      raindrop.height = 32;
 		      gotasPos.addActor(raindrop);
 	      }
-	      if (numRand >= 96 && numRand<=98) 
+	      if (numRand >= 97 && numRand<=98) 
 	      {
 	    	  gotasTipo.addActorTipo(3);
 	    	  raindrop.width = 32;
@@ -75,8 +75,8 @@ public class Lluvia implements TipoObstaculo{
 	      if (numRand >= 99) 
 	      {
 	    	  gotasTipo.addActorTipo(4);
-	    	  raindrop.width = 64;
-	    	  raindrop.height = 76;
+	    	  raindrop.width = 50;
+	    	  raindrop.height = 50;
 	    	  gotasPos.addActor(raindrop);
 	      }	
 	      	
@@ -88,7 +88,7 @@ public class Lluvia implements TipoObstaculo{
 	   // generar gotas de lluvia 
 	
 	   
-	   if(TimeUtils.nanoTime() - lastDropTime > 100000000-10000000) 
+	   if(TimeUtils.nanoTime() - lastDropTime > 19990000) 
 		   crearObjetoObstaculo();
 	   
 	  
@@ -97,7 +97,7 @@ public class Lluvia implements TipoObstaculo{
 	   for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
 		  Rectangle raindrop = gotasPos.getActor(i);
 	      raindrop.y -= 600 * Gdx.graphics.getDeltaTime();
-	      raindrop.x -= 200 * Gdx.graphics.getDeltaTime();
+	      raindrop.x -= 300 * Gdx.graphics.getDeltaTime();
 	      //cae al suelo y se elimina
 	      if(raindrop.y + 32 < 0) {
 	    	  gotasPos.removeActor(i); 
