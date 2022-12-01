@@ -1,4 +1,4 @@
-package Screems;
+package Screens;
 
 
 import com.badlogic.gdx.Gdx;

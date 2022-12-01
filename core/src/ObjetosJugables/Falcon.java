@@ -16,7 +16,7 @@ import strategy.StrategyFalcon;
 
 public class Falcon extends TipoObjetoMovi {
 
-	  public Falcon(int objetMov) {
+	  public Falcon() {
 		   
 		   super(new Texture(Gdx.files.internal("falcon.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));

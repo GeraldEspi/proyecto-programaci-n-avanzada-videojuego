@@ -1,6 +1,6 @@
 package strategy;
 
-public class StrategyAnguila implements StrategyObjMovi{
+public class StrategyAnguilatroz implements StrategyObjMovi{
 	
 	@Override
 	public int curarVidas(int vidas){
@@ -10,30 +10,29 @@ public class StrategyAnguila implements StrategyObjMovi{
 	
 	@Override
 	public int curarVelx(){
-		return 600;
+		return 400;
 	}
 	
 	@Override
 	public int dañarVidas(int vidas){
-		vidas-=2;
+		vidas--;
 		return vidas;
 	}
 	
 	@Override
 	public int dañarVelx(int velx){
-		velx-=100;
-		return velx;
+		return velx/2;
 	}
 	
 	@Override
 	public int dañarVidas(int vidas, int a){
-		vidas-=5;
+		vidas -=3;
 		return vidas;
 	}
 	
 	@Override
 	public int getVidas(){
-		return 3;
+		return 5;
 	}
 }
 

@@ -1,6 +1,7 @@
-package Screems;
+package Screens;
 
 import com.badlogic.gdx.Gdx;
+
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -16,9 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.GameLluviaMenu;
 import com.mygdx.game.ParallaxBackground;
 
 import ObjetosJugables.Anguila;
+import ObjetosJugables.Anguilatroz;
+import ObjetosJugables.Colibri;
 import ObjetosJugables.Falcon;
 import ObjetosJugables.TipoObjetoMovi;
 
@@ -29,26 +33,27 @@ public class GameScreen implements Screen {
 	private BitmapFont font;
 	private TipoObjetoMovi player;
 	private TipoObstaculo obstaculo;
-	private int opcion;
+	private int opcionGame;
+	private int opcionPerso;
 	private Stage stage;
 
-	ParallaxBackground parallaxBackground;
+	private ParallaxBackground parallaxBackground;
 	 
 	//boolean activo = true;
 
-	public GameScreen(final GameLluviaMenu game, int opcion) {
+	public GameScreen(final GameLluviaMenu game, int opcion1, int opcion2) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
-	    this.opcion=opcion;  
+        this.opcionGame = opcion1;
+    	this.opcionPerso = opcion2;
 	    // camera
 	    camera = new OrthographicCamera();
 	    camera.setToOrtho(false, 1280, 720);
         batch = new SpriteBatch();
         
-        
-        
-        if(opcion==1) { // Se carga el cielo 
+        if(opcionGame == 1) 
+        {
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
@@ -64,20 +69,28 @@ public class GameScreen implements Screen {
             
            
             stage.addActor(parallaxBackground);
-        	player = new Falcon(opcion);
-        	player.crear();
-        
-	      
-        // creacion de la lluvia
-        	obstaculo = new Lluvia();
+            
+            if(opcionPerso==1) { // crea objeto falcon
+            	
+            	player = new Falcon();
+            	player.crear();
+            }
+            
+            if (opcionPerso==2) { // Opción 2 crea objeto colibri
+                
+            	player = new Colibri();
+            	player.crear();
+            }
+            obstaculo = new Lluvia();
         	obstaculo.crear();
         }
         
-        if (opcion==2) { // Opción 2 se carga el mar
+        if(opcionGame == 2) 
+        {
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
-        	player = new Anguila(opcion);
+        	player = new Colibri();
             player.crear();
             
         	Array<Texture> textures = new Array<Texture>();
@@ -90,17 +103,23 @@ public class GameScreen implements Screen {
             parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             parallaxBackground.setSpeed(1);
             
-          
+            stage.addActor(parallaxBackground);
             
-        stage.addActor(parallaxBackground);
-        player = new Anguila(opcion);
-        player.crear();
-   
-    	      
-        // creacion del campo de peces
-        obstaculo = new CampoPeces();
-        obstaculo.crear();
+            if(opcionPerso==1) { // crea objeto falcon
+            	
+            	player = new Anguila();
+            	player.crear();
+            }
+            
+            if (opcionPerso==2) { // Opción 2 crea objeto colibri
+                
+            	player = new Anguilatroz();
+            	player.crear();
+            }
+            obstaculo = new CampoPeces();
+        	obstaculo.crear();
         }
+        
 	}
 
 	@Override
@@ -138,7 +157,7 @@ public class GameScreen implements Screen {
 	    	  if (game.getHigherScore()<player.getPuntos())
 	    		  game.setHigherScore(player.getPuntos());  
 	    	  //ir a la ventana de finde juego y destruir la actual
-	    	  game.setScreen(new GameOverScreen(game,opcion));
+	    	  game.setScreen(new GameOverScreen(game,opcionGame,opcionPerso));
 	    	  dispose();
 	       }
 		}

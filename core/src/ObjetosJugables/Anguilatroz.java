@@ -1,22 +1,21 @@
 package ObjetosJugables;
 
 import com.badlogic.gdx.Gdx;
-
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-import strategy.StrategyAnguila;
+import strategy.StrategyAnguilatroz;
 
-public class Anguila extends TipoObjetoMovi{  
-	  
-	  public Anguila() {
+public class Anguilatroz extends TipoObjetoMovi{
+	
+	public Anguilatroz() {
 
-		   super(new Texture(Gdx.files.internal("anguila.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("anguilatroz.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
-		   this.metodosObjMovi = new StrategyAnguila();
+		   this.metodosObjMovi = new StrategyAnguilatroz();
 		   this.vidas = metodosObjMovi.getVidas();
 		   this.velx = metodosObjMovi.curarVelx();
 	   }
@@ -66,11 +65,5 @@ public class Anguila extends TipoObjetoMovi{
 		   if(player.getY() < 0) player.setY(0);
 		   if(player.getY() > 640 - 64) player.setY(640 - 64);
 	   }
-	   
-	   
+
 }
-
- 
-
-
-
