@@ -1,14 +1,20 @@
-package com.mygdx.game;
+package Screems;
 
 import com.badlogic.gdx.Gdx;
-	import com.badlogic.gdx.audio.Music;
-	import com.badlogic.gdx.audio.Sound;
-	import com.badlogic.gdx.graphics.Texture;
-	import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-	import com.badlogic.gdx.math.MathUtils;
-	import com.badlogic.gdx.math.Rectangle;
-	import com.badlogic.gdx.utils.Array;
-	import com.badlogic.gdx.utils.TimeUtils;
+
+
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+
+import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.ActorPos;
+import com.mygdx.game.ActorTipo;
+
+import ObjetosJugables.TipoObjetoMovi;
 
 public class CampoPeces implements TipoObstaculo
 {
@@ -34,6 +40,7 @@ public class CampoPeces implements TipoObstaculo
 			this.pezBueno = new Texture(Gdx.files.internal("pezBueno.png"));
 		}
 		
+	    @Override
 		public void crear() {
 			fishPos = new ActorPos();
 			fishTipo = new ActorTipo();
@@ -43,6 +50,7 @@ public class CampoPeces implements TipoObstaculo
 		      debajoDelMar.play();
 		}
 		
+	    @Override
 		public void crearObjetoObstaculo() {
 		      Rectangle raindrop = new Rectangle();
 		      
@@ -66,6 +74,7 @@ public class CampoPeces implements TipoObstaculo
 		      lastDropTime = TimeUtils.nanoTime();
 	    }
 		
+	    @Override
 		public boolean actualizarMovimiento(TipoObjetoMovi player) { 
 		   // generando objetos 
 		   if(TimeUtils.nanoTime() - lastDropTime > 100000000) 
@@ -80,7 +89,7 @@ public class CampoPeces implements TipoObstaculo
 		 
 		      //Movimiento en eje y de los pezTiburon, va aumentando segun el coefMov
 		      if(fishTipo.getActorTipo(i)==1)
-		    	  { raindrop.y+=MathUtils.random(-player.puntos*2,player.puntos*2)* Gdx.graphics.getDeltaTime();  raindrop.x -= 310 * Gdx.graphics.getDeltaTime();  }
+		    	  { raindrop.y+=MathUtils.random(-player.getPuntos()*2,player.getPuntos()*2)* Gdx.graphics.getDeltaTime();  raindrop.x -= 310 * Gdx.graphics.getDeltaTime();  }
 		      
 		     
 		     // Objeto tipo pez curador  	  
@@ -135,6 +144,7 @@ public class CampoPeces implements TipoObstaculo
 		  return true; 
 	   }
 	   
+	    @Override
 		public void actualizarDibujoObjeto(SpriteBatch batch) { 
 		   
 		  for (int i=0; i < fishPos.getSizeArray(); i++ ) {
@@ -148,15 +158,18 @@ public class CampoPeces implements TipoObstaculo
 		   }
 	   }
 	   
+	    @Override
 		public void destruir() {
 	      getItemSound.dispose();
 	      debajoDelMar.dispose();
 	   }
 	   
+	    @Override
 		public void pausar() {
 		  debajoDelMar.stop();
 	   }
 	   
+	    @Override
 		public void continuar() {
 		  debajoDelMar.play();
 	   }

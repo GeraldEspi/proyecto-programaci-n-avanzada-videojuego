@@ -1,6 +1,8 @@
-package com.mygdx.game;
+package Screems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import ObjetosJugables.TipoObjetoMovi;
 
 public interface TipoObstaculo {
 	public void crear();

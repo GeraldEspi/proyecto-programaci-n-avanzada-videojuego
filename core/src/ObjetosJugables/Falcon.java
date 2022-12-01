@@ -1,6 +1,8 @@
-package com.mygdx.game;
+package ObjetosJugables;
 
 import java.sql.Date;
+
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
@@ -9,23 +11,27 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
+import strategy.StrategyFalcon;
+
 
 public class Falcon extends TipoObjetoMovi {
-	  
-	  private int velx = 400;
-	  Sound healSound;
 
-	  public Falcon() {
+	  public Falcon(int objetMov) {
 		   
 		   super(new Texture(Gdx.files.internal("falcon.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
-		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
+		   healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
+		   this.metodosObjMovi = new StrategyFalcon();
+		   this.vidas = metodosObjMovi.getVidas();
+		   this.velx = metodosObjMovi.curarVelx();
 		   
 	   }
 	   
+	  @Override
 	  public Rectangle getArea(){
 			return player.getBoundingRectangle();
 		}
-		
+	 
+	  @Override
 	  public void dibujar(SpriteBatch batch) {
 		 if (!herido)  
 		   player.draw(batch);
@@ -36,20 +42,9 @@ public class Falcon extends TipoObjetoMovi {
 		   tiempoHerido--;
 		   if (tiempoHerido<=0) herido = false;
 		 }
-	   } 
-	   
-	   @Override
-	  public void curar(){
-		   vidas++;
-		   velx = 400;
-		   healSound.play();
-	   }
-	   
-	  public void setVelo(int newVelo) 
-	   {
-		   this.velx = newVelo;
 	   }
  
+	  @Override
 	  public void actualizarMovimiento()  { 
 		   // movimiento desde mouse/touch
 		   /*if(Gdx.input.isTouched()) {

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package ObjetosJugables;
 
 import com.badlogic.gdx.Gdx;
 
@@ -8,17 +8,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Anguila extends TipoObjetoMovi{
-	  private int velx = 400;
+import strategy.StrategyAnguila;
+
+public class Anguila extends TipoObjetoMovi{  
 	  
-	  
-	  
-	  public Anguila() {
-		  
-		   
-		   super(new Texture(Gdx.files.internal("anguila.png")),
-				   Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
-		 
+	  public Anguila(int opcion) {
+
+		   super(new Texture(Gdx.files.internal("anguila.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
+		   this.metodosObjMovi = new StrategyAnguila();
+		   this.vidas = metodosObjMovi.getVidas();
+		   this.velx = metodosObjMovi.curarVelx();
 	   }
 	   
 	  public Rectangle getArea(){
@@ -40,11 +40,6 @@ public class Anguila extends TipoObjetoMovi{
 		   if (tiempoHerido<=0) herido = false; 
 		 }
 	   } 
-	   
-	  public void setVelo(int newVelo) 
-	   {
-		   this.velx = newVelo;
-	   }
 	   
 	  public void actualizarMovimiento() { 
 		   // movimiento desde mouse/touch

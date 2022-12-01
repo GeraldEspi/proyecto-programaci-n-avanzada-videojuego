@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package Screems;
 
 
 import com.badlogic.gdx.Gdx;
@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.ActorPos;
+import com.mygdx.game.ActorTipo;
+
+import ObjetosJugables.TipoObjetoMovi;
 
 public class Lluvia implements TipoObstaculo{
 	private ActorPos gotasPos;
@@ -34,6 +38,7 @@ public class Lluvia implements TipoObstaculo{
 		this.granizo= new Texture(Gdx.files.internal("hielo.png"));
 	}
 	
+	@Override
 	public void crear() {
 		gotasPos = new ActorPos();
 		gotasTipo = new ActorTipo();
@@ -43,6 +48,7 @@ public class Lluvia implements TipoObstaculo{
 	    rainMusic.play();
 	}
 	
+	@Override
 	public void crearObjetoObstaculo() {
 	      Rectangle raindrop = new Rectangle();
 	      raindrop.x = MathUtils.random(0, 1580-32);
@@ -84,6 +90,7 @@ public class Lluvia implements TipoObstaculo{
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
 	
+	@Override
 	public boolean actualizarMovimiento(TipoObjetoMovi player) { 
 	   // generar gotas de lluvia 
 	
@@ -107,6 +114,7 @@ public class Lluvia implements TipoObstaculo{
 	    	if(gotasTipo.getActorTipo(i)==1) { // gota dañina
 	    	  player.sumarPuntos(-20);
 	    	  player.dañar();
+	    	  
 	    	  if(player.getPuntos()<=0) player.setPuntos(0);
 	    	  if (player.getVidas()<=0)
 	    		 return false; // si se queda sin vidas retorna falso /game over
@@ -128,7 +136,6 @@ public class Lluvia implements TipoObstaculo{
 	      	
 	      	if(gotasTipo.getActorTipo(i)==4) { // granizo
 		    	  player.dañar(2);
-		    	  player.setVelo(200);
 		  
 		    	  if (player.getVidas()<=0)
 		    		 return false; // si se queda sin vidas retorna falso /game over
@@ -142,7 +149,8 @@ public class Lluvia implements TipoObstaculo{
 	   } 
 	  return true; 
    }
-   
+	
+	@Override
 	public void actualizarDibujoObjeto(SpriteBatch batch) { 
 	   
 	  for (int i=0; i < gotasPos.getSizeArray(); i++ ) {
@@ -158,15 +166,18 @@ public class Lluvia implements TipoObstaculo{
 	   }
    }
 	
+	@Override
 	public void destruir() {
       getItemSound.dispose();
       rainMusic.dispose();
    }
-   
+	
+	@Override
 	public void pausar() {
 	  rainMusic.stop();
    }
-   
+	
+	@Override
 	public void continuar() {
 	  rainMusic.play();
    }

@@ -1,6 +1,7 @@
-package com.mygdx.game;
+package Screems;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -15,6 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.ParallaxBackground;
+
+import ObjetosJugables.Anguila;
+import ObjetosJugables.Falcon;
+import ObjetosJugables.TipoObjetoMovi;
 
 public class GameScreen implements Screen {
 	final GameLluviaMenu game;
@@ -57,21 +63,21 @@ public class GameScreen implements Screen {
             parallaxBackground.setSpeed(1);
             
            
-        stage.addActor(parallaxBackground);
-        player = new Falcon();
-        player.crear();
+            stage.addActor(parallaxBackground);
+        	player = new Falcon(opcion);
+        	player.crear();
         
 	      
         // creacion de la lluvia
-        obstaculo = new Lluvia();
-        obstaculo.crear();
+        	obstaculo = new Lluvia();
+        	obstaculo.crear();
         }
         
         if (opcion==2) { // Opción 2 se carga el mar
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
-        	player = new Anguila();
+        	player = new Anguila(opcion);
             player.crear();
             
         	Array<Texture> textures = new Array<Texture>();
@@ -87,7 +93,7 @@ public class GameScreen implements Screen {
           
             
         stage.addActor(parallaxBackground);
-        player = new Anguila();
+        player = new Anguila(opcion);
         player.crear();
    
     	      
