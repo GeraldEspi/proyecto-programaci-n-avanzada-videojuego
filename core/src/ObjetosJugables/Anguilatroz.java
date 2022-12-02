@@ -29,8 +29,7 @@ public class Anguilatroz extends TipoObjetoMovi{
 		}
 		
 	  public void dibujar(SpriteBatch batch) {
-		  
-		  
+
 		if(puntos >= 50 && esAnguila == false) {
 				setStrategy(new StrategyAnguila());
 				setTextura(new Texture(Gdx.files.internal("anguila.png")));
