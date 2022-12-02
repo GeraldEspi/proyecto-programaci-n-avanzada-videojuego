@@ -16,14 +16,12 @@ public class GameOverScreen implements Screen {
 	private BitmapFont font;
 	private OrthographicCamera camera;
 	private int opcionGame;
-	private int opcionPerso;
 
-	public GameOverScreen(final GameLluviaMenu game, int opcion1, int opcion2) {
+	public GameOverScreen(final GameLluviaMenu game, int opcion1) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
         this.opcionGame = opcion1;
-    	this.opcionPerso = opcion2;
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		
@@ -43,7 +41,7 @@ public class GameOverScreen implements Screen {
 		batch.end();
 
 		if (Gdx.input.isKeyPressed(Input.Keys.R)) {
-			game.setScreen(new GameScreen(game, opcionGame, opcionPerso, null));
+			game.setScreen(new GameScreen(game, opcionGame, null));
 			dispose();
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.S)) {

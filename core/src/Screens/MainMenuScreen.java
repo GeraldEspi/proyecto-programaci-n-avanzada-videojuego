@@ -17,7 +17,7 @@ public class MainMenuScreen implements Screen {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private OrthographicCamera camera;
-	private int opcion;
+	private int opcionGame;
 
 	public MainMenuScreen(final GameLluviaMenu game) {
 		this.game = game;
@@ -42,13 +42,13 @@ public class MainMenuScreen implements Screen {
 		batch.end();
 
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-			opcion=1;
-			game.setScreen(new SelectScreen(game, opcion));
+			opcionGame=1;
+			game.setScreen(new GameScreen(game, opcionGame, null));
 			dispose();
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-			opcion=2;
-			game.setScreen(new SelectScreen(game, opcion));
+			opcionGame=2;
+			game.setScreen(new GameScreen(game, opcionGame, null));
 			dispose();
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {

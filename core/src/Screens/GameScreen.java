@@ -36,7 +36,6 @@ public class GameScreen implements Screen {
 	private TipoObjetoMovi player;
 	private TipoObstaculo obstaculo;
 	private int opcionGame;
-	private int opcionPerso;
 	private Stage stage;
 	
 
@@ -45,13 +44,12 @@ public class GameScreen implements Screen {
 	 
 	//boolean activo = true;
 
-	public GameScreen(final GameLluviaMenu game, int opcion1, int opcion2, Highscore highscore ) {
+	public GameScreen(final GameLluviaMenu game, int opcion1, Highscore highscore ) {
 		this.game = game;
 		this.highscore = Highscore.getHighscore();
         this.batch = game.getBatch();
         this.font = game.getFont();
         this.opcionGame = opcion1;
-    	this.opcionPerso = opcion2;
     	
 	    // camera
 	    camera = new OrthographicCamera();
@@ -78,17 +76,10 @@ public class GameScreen implements Screen {
            
             stage.addActor(parallaxBackground);
             
-            if(opcionPerso==1) { // crea objeto falcon
-            	
-            	player = new Falcon();
-            	player.crear();
-            }
+            // crea objeto falcon
+            player = new Falcon();
+            player.crear();
             
-            if (opcionPerso==2) { // Opción 2 crea objeto colibri
-                
-            	player = new Colibri();
-            	player.crear();
-            }
             obstaculo = new Lluvia();
         	obstaculo.crear();
         }
@@ -113,18 +104,10 @@ public class GameScreen implements Screen {
             parallaxBackground.setSpeed(1);
             
             stage.addActor(parallaxBackground);
-            
-            if(opcionPerso==1) { // crea objeto falcon
-            	
-            	player = new Anguila();
-            	player.crear();
-            }
-            
-            if (opcionPerso==2) { // Opción 2 crea objeto colibri
-                
-            	player = new Anguilatroz();
-            	player.crear();
-            }
+                            
+            player = new Anguilatroz();
+            player.crear();
+
             obstaculo = new CampoPeces();
         	obstaculo.crear();
         }
@@ -166,7 +149,7 @@ public class GameScreen implements Screen {
 	    	  if (highscore.getHigherScore()<player.getPuntos())
 	    		  highscore.setHigherScore(player.getPuntos());  
 	    	  //ir a la ventana de finde juego y destruir la actual
-	    	  game.setScreen(new GameOverScreen(game,opcionGame,opcionPerso));
+	    	  game.setScreen(new GameOverScreen(game,opcionGame));
 	    	  dispose();
 	       }
 		}
