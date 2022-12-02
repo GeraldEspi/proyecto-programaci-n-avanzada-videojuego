@@ -119,11 +119,16 @@ public class CampoPeces implements TipoObstaculo
 		      }
 		      if(raindrop.overlaps(player.getArea())) { //Pez tiburon malvado
 		    	if(fishTipo.getActorTipo(i)==1) { // te muerde y hace daño, se muere en el intento
+		    	  if(!player.especialActivado())
+		    	  {
 		    	  player.dañar();
+		    	  
+		    	
 		    	  if (player.getVidas()<=0)
 		    		 return false; // si se queda sin vidas retorna falso /game over
 		    	  fishPos.removeActor(i);  
 		    	  fishTipo.removeActorTipo(i);
+		    	  }
 		      	}
 		    	if(fishTipo.getActorTipo(i)==2) { //alga
 		    	  player.sumarPuntos(1);

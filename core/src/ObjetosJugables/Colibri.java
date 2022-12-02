@@ -13,7 +13,7 @@ public class Colibri extends TipoObjetoMovi{
 	
 	public Colibri() {
 		   
-		   super(new Texture(Gdx.files.internal("colibri.png")),new Texture(Gdx.files.internal("Colibri_slowed.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("colibri.png")),new Texture(Gdx.files.internal("Colibri_slowed.png")),null, Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyColibri();
 		   this.vidas = metodosObjMovi.getVidas();
@@ -55,6 +55,9 @@ public class Colibri extends TipoObjetoMovi{
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) player.setX(player.getX()+velx * Gdx.graphics.getDeltaTime());
 		   if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) player.setY(player.getY()+velx * Gdx.graphics.getDeltaTime());
 		   if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) player.setY(player.getY()-velx * Gdx.graphics.getDeltaTime());
+		   
+		   if(Gdx.input.isKeyPressed(Input.Keys.Q)) especial();
+		   
 		   //Sprite
 		   
 		   if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) 

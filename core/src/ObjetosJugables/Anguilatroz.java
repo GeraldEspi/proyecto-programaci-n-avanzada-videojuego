@@ -13,7 +13,7 @@ public class Anguilatroz extends TipoObjetoMovi{
 	
 	public Anguilatroz() {
 
-		   super(new Texture(Gdx.files.internal("anguilatroz.png")),null, Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("anguilatroz.png")),null,null, Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyAnguilatroz();
 		   this.vidas = metodosObjMovi.getVidas();

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Timers;
 
 import strategy.StrategyObjMovi;
 
@@ -14,6 +15,7 @@ public abstract class TipoObjetoMovi {
 	   protected Sprite player;
 	   protected Texture playerSkin;
 	   protected Texture playerEffectSkin;
+	   protected Texture playerEspecialSkin;
 	   protected Sound sonidoHerido;
 	   protected Sound healSound;
 	   protected StrategyObjMovi metodosObjMovi;
@@ -23,10 +25,14 @@ public abstract class TipoObjetoMovi {
 	   protected boolean herido = false;
 	   protected int tiempoHeridoMax=50;
 	   protected int tiempoHerido;
+	   protected boolean activado;
+	   protected int especialTime;
+	 
 	   
-	   public TipoObjetoMovi(Texture tex, Texture tex2, Sound ss) {
+	   public TipoObjetoMovi(Texture tex, Texture tex2, Texture tex3, Sound ss) {
 		   playerSkin = tex;
 		   playerEffectSkin = tex2;
+		   playerEspecialSkin = tex3;
 		   sonidoHerido = ss;  
 	   }
 	   
@@ -50,6 +56,10 @@ public abstract class TipoObjetoMovi {
 			puntos+=pp;
 		}
 		
+		public void restarPuntos(int pp) {
+			puntos-=pp;
+		}
+		
 		
 	   public void crear(){
 		   player= new Sprite(playerSkin);
@@ -60,6 +70,7 @@ public abstract class TipoObjetoMovi {
 	   {
 		   vidas = metodosObjMovi.curarVidas(this.vidas);
 		   velx = metodosObjMovi.curarVelx();
+		   activado = false;
 		   player.setTexture(playerSkin);
 		   healSound.play();
 	   }
@@ -68,6 +79,7 @@ public abstract class TipoObjetoMovi {
 	   {
 		   this.vidas = metodosObjMovi.dañarVidas(this.vidas);
 		   herido = true;
+		   activado = false;
 		   tiempoHerido=tiempoHeridoMax;
 		   sonidoHerido.play();
 	   }
@@ -82,6 +94,25 @@ public abstract class TipoObjetoMovi {
 			  sonidoHerido.play();
 	   }
 	   
+	   public boolean especial() 
+	   {
+		   player.setTexture(playerEspecialSkin);
+		   activado = true;
+		  
+		   especialTime = Timers.getSeconds();
+		   return activado;
+	   }
+	   
+	   
+	   public boolean desactivarEspecial() 
+	   {
+		   player.setTexture(playerSkin);
+		   activado = false;
+		   return activado;
+	   }
+	   
+	   
+	   
 	   public void destruir() {
 			    playerSkin.dispose();
 	   }
@@ -90,6 +121,10 @@ public abstract class TipoObjetoMovi {
 		   return herido;
 	   }
 	   
+	 
+	   public boolean especialActivado() {
+		   return activado;
+	   }
 	   public abstract void dibujar(SpriteBatch batch);
 	   
 	   public abstract void actualizarMovimiento();

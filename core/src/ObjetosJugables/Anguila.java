@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Timers;
 
 import strategy.StrategyAnguila;
 
 public class Anguila extends TipoObjetoMovi{  
 	  
+	  
 	  public Anguila() {
 
-		   super(new Texture(Gdx.files.internal("anguila.png")),null,Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("anguila.png")),null,new Texture(Gdx.files.internal("camuflaje.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyAnguila();
 		   this.vidas = metodosObjMovi.getVidas();
@@ -27,19 +29,27 @@ public class Anguila extends TipoObjetoMovi{
 		
 	  public void dibujar(SpriteBatch batch) {
 		 
+		if(especialTime+2 == Timers.getSeconds())
+		{
+			desactivarEspecial();
+		}
+		
 		if (!herido)  
 		   {player.draw(batch); 
 		  
 		   }
 		   
 		 else {
-		
+			
 		   player.setX(player.getX()+MathUtils.random(-5,5));  
 		   player.draw(batch);
 		   tiempoHerido--;
+		   
 		   if (tiempoHerido<=0) herido = false; 
 		 }
-	   } 
+	   }
+	  
+	  
 	   
 	  public void actualizarMovimiento() { 
 		   // movimiento desde mouse/touch
@@ -59,6 +69,10 @@ public class Anguila extends TipoObjetoMovi{
 				   && Gdx.input.isKeyPressed(Input.Keys.SPACE)) player.setY(player.getY()+velx * Gdx.graphics.getDeltaTime()*2);
 		   if((Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) 
 				   && Gdx.input.isKeyPressed(Input.Keys.SPACE)) player.setY(player.getY()-velx * Gdx.graphics.getDeltaTime()*2);
+		   
+		  
+		  
+		   if((Gdx.input.isKeyPressed(Input.Keys.Q))) especial();
 		   
 		   // que no se salga de los bordes izq y der
 		   if(player.getX() < 0) player.setX(0);

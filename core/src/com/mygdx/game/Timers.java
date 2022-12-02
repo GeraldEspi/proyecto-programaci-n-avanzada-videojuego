@@ -11,11 +11,12 @@ public class Timers {
 	static TimerTask task = new TimerTask() {
 		public void run() {
 			secondsPassed++;
-			System.out.print(secondsPassed);
 			
 		}
 	
 	};
+
+	
 	
 	public static void start()
 	{
@@ -32,6 +33,12 @@ public class Timers {
 	public static void stop()
 	{
 		myTimer.cancel();
+	}
+	
+	public static int getSeconds()
+	{
+		return secondsPassed;
+		
 	}
 	
 	

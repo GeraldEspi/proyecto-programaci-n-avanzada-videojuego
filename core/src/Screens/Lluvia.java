@@ -24,11 +24,16 @@ public class Lluvia implements TipoObstaculo{
     private Texture granizo;
     private long seconds;//se usara despues
     private Sound getItemSound;
+    private Sound freezeSound1;
+    private Sound freezeSound2;
     private Music rainMusic;
    
 	public Lluvia() {
 		
 		getItemSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
+		
+        freezeSound1 = Gdx.audio.newSound(Gdx.files.internal("freeze.mp3"));
+        freezeSound2 = Gdx.audio.newSound(Gdx.files.internal("icy.mp3"));
         
 		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
         
@@ -136,9 +141,16 @@ public class Lluvia implements TipoObstaculo{
 	      	
 	      	if(gotasTipo.getActorTipo(i)==4) { // granizo
 		    	  player.dañar(2);
+		    	  int numRand = MathUtils.random(1,2);
+		    	  if (numRand == 1 )freezeSound1.play();
+		    	  if (numRand == 2 )freezeSound2.play();
 		  
 		    	  if (player.getVidas()<=0)
+		    	  {
+		    		  if (numRand == 1 )freezeSound1.stop();
+		    	  	  if (numRand == 2 )freezeSound2.stop();
 		    		 return false; // si se queda sin vidas retorna falso /game over
+		    	  }
 		    	  gotasPos.removeActor(i);  
 		    	  gotasTipo.removeActorTipo(i);
 		          
