@@ -1,4 +1,4 @@
-package Screens;
+package Builder;
 
 
 import com.badlogic.gdx.Gdx;
@@ -14,7 +14,7 @@ import com.mygdx.game.ActorTipo;
 
 import ObjetosJugables.TipoObjetoMovi;
 
-public class Lluvia implements TipoObstaculo{
+public class Lluvia implements Builder{
 	private ActorPos gotasPos;
 	private ActorTipo gotasTipo;
     private long lastDropTime;

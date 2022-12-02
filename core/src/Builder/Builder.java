@@ -1,10 +1,10 @@
-package Screens;
+package Builder;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import ObjetosJugables.TipoObjetoMovi;
 
-public interface TipoObstaculo {
+public interface Builder {
 	public void crear();
 	public void crearObjetoObstaculo();
 	public boolean actualizarMovimiento(TipoObjetoMovi actor);

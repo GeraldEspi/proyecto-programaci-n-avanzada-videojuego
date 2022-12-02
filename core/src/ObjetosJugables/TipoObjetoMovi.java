@@ -77,11 +77,11 @@ public abstract class TipoObjetoMovi {
 	   {
 		   if(vidas < metodosObjMovi.getVidas()){
 			   vidas = metodosObjMovi.curarVidas(this.vidas);
-			   velx = metodosObjMovi.curarVelx();
-			   activado = false;
-			   player.setTexture(playerSkin);
 			   healSound.play();
 		   }
+		   activado = false;
+		   player.setTexture(playerSkin);
+		   velx = metodosObjMovi.curarVelx();
 	   }
 	   
 	   public void dañar() 

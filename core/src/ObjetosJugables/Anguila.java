@@ -10,9 +10,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.Timers;
 
 import strategy.StrategyAnguila;
+import strategy.StrategyAnguilatroz;
 
-public class Anguila extends TipoObjetoMovi{  
-	  
+public class Anguila extends TipoObjetoMovi{ 
+	
+	private boolean esAnguilatroz = false;  
 	  
 	  public Anguila() {
 
@@ -28,6 +30,15 @@ public class Anguila extends TipoObjetoMovi{
 		}
 		
 	  public void dibujar(SpriteBatch batch) {
+		  
+		 if(puntos >= 50 && esAnguilatroz == false) {
+				setStrategy(new StrategyAnguilatroz());
+				setTextura(new Texture(Gdx.files.internal("anguilatroz.png")));
+				this.vidas = metodosObjMovi.getVidas();
+				this.velx = metodosObjMovi.curarVelx();
+				esAnguilatroz = true;
+		}
+		 
 		 
 		if(especialTime+2 == Timers.getSeconds())
 		{

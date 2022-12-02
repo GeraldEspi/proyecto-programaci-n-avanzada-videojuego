@@ -8,24 +8,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameLluviaMenu;
 import com.mygdx.game.Highscore;
 import com.mygdx.game.ParallaxBackground;
-import com.mygdx.game.Timers;
 
+import Builder.CampoPeces;
+import Builder.Lluvia;
+import Builder.Builder;
 import ObjetosJugables.Anguila;
-import ObjetosJugables.Anguilatroz;
-import ObjetosJugables.Colibri;
 import ObjetosJugables.Falcon;
 import ObjetosJugables.TipoObjetoMovi;
-import strategy.StrategyColibri;
+import TemplateMethod.TemplateCrearParallax;
+import TemplateMethod.TemplateParallaxLLuvia;
+import TemplateMethod.TemplateParallaxPeces;
 
 public class GameScreen implements Screen {
 	final GameLluviaMenu game;
@@ -34,13 +34,11 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private TipoObjetoMovi player;
-	private TipoObstaculo obstaculo;
+	private Builder obstaculo;
 	private int opcionGame;
 	private Stage stage;
-	
-
-
 	private ParallaxBackground parallaxBackground;
+	private TemplateCrearParallax inicioNivel;
 	 
 	//boolean activo = true;
 
@@ -50,6 +48,7 @@ public class GameScreen implements Screen {
         this.batch = game.getBatch();
         this.font = game.getFont();
         this.opcionGame = opcion1;
+        
     	
 	    // camera
 	    camera = new OrthographicCamera();
@@ -57,26 +56,18 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         
         
-        if(opcionGame == 1) 
+        if(opcionGame == 1)
         {
+        	this.inicioNivel = new TemplateParallaxLLuvia();
         	
-        	stage = new Stage(new ScreenViewport());
+        	
         	font.setColor(Color.BLACK); // color setteado
-        	 
-        	Array<Texture> textures = new Array<Texture>();
-            for(int i = 1; i <=6;i++){
-                textures.add(new Texture(Gdx.files.internal("parallax/img"+i+".png")));
-                textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
-            }
-
-            parallaxBackground = new ParallaxBackground(textures);
-            parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-            parallaxBackground.setSpeed(1);
-            
+        	stage = new Stage(new ScreenViewport());
+        	
+        	parallaxBackground = inicioNivel.crearNivel();
            
             stage.addActor(parallaxBackground);
             
-            // crea objeto falcon
             player = new Falcon();
             player.crear();
             
@@ -86,26 +77,16 @@ public class GameScreen implements Screen {
         
         if(opcionGame == 2) 
         {
+        	this.inicioNivel = new TemplateParallaxPeces();
         	
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
-        	 
-        	player = new Colibri();
-            player.crear();
-            
-        	Array<Texture> textures = new Array<Texture>();
-            for(int i = 1; i <=4;i++){
-                textures.add(new Texture(Gdx.files.internal("seaBackparallax/img"+i+".png")));
-                textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
-            }
+        	
+        	parallaxBackground = inicioNivel.crearNivel();
 
-            parallaxBackground = new ParallaxBackground(textures);
-            parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-            parallaxBackground.setSpeed(1);
-            
             stage.addActor(parallaxBackground);
                             
-            player = new Anguilatroz();
+            player = new Anguila();
             player.crear();
 
             obstaculo = new CampoPeces();

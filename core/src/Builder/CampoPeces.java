@@ -1,4 +1,4 @@
-package Screens;
+package Builder;
 
 import com.badlogic.gdx.Gdx;
 
@@ -16,7 +16,7 @@ import com.mygdx.game.ActorTipo;
 
 import ObjetosJugables.TipoObjetoMovi;
 
-public class CampoPeces implements TipoObstaculo
+public class CampoPeces implements Builder
 {
 		private ActorPos fishPos;
 		private ActorTipo fishTipo;
