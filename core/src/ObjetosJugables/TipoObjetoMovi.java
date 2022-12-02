@@ -52,6 +52,13 @@ public abstract class TipoObjetoMovi {
 			this.metodosObjMovi = strategyObje;
 		}
 		
+		public void setTextura(Texture tx) {
+			this.playerSkin = tx;
+			this.player = new Sprite(playerSkin);
+			player.setCenterX(1280/2-64/2);
+			player.setY(720/2);
+		}
+		
 		public void sumarPuntos(int pp) {
 			puntos+=pp;
 		}
@@ -68,11 +75,13 @@ public abstract class TipoObjetoMovi {
 	   }
 	   public void curar() 
 	   {
-		   vidas = metodosObjMovi.curarVidas(this.vidas);
-		   velx = metodosObjMovi.curarVelx();
-		   activado = false;
-		   player.setTexture(playerSkin);
-		   healSound.play();
+		   if(vidas < metodosObjMovi.getVidas()){
+			   vidas = metodosObjMovi.curarVidas(this.vidas);
+			   velx = metodosObjMovi.curarVelx();
+			   activado = false;
+			   player.setTexture(playerSkin);
+			   healSound.play();
+		   }
 	   }
 	   
 	   public void dañar() 

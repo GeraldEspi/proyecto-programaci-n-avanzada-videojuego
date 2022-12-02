@@ -12,11 +12,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 import strategy.StrategyFalcon;
+import strategy.StrategyColibri;
 
 
 public class Falcon extends TipoObjetoMovi {
-
-	  public Falcon() {
+	
+	private boolean  esColi = false;	  
+	public Falcon() {
 		   
 		   super(new Texture(Gdx.files.internal("falcon.png")), new Texture(Gdx.files.internal("slowedFalcon.png")),null,Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
@@ -33,6 +35,15 @@ public class Falcon extends TipoObjetoMovi {
 	 
 	  @Override
 	  public void dibujar(SpriteBatch batch) {
+		  
+		 if(puntos >= 50 && esColi == false) {
+				setStrategy(new StrategyColibri());
+				setTextura(new Texture(Gdx.files.internal("colibri.png")));
+				this.vidas = metodosObjMovi.getVidas();
+				this.velx = metodosObjMovi.curarVelx();
+				esColi = true;
+		 }
+		 
 		 if (!herido)  
 		   player.draw(batch);
 		 else {

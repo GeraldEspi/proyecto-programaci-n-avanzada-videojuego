@@ -1,6 +1,7 @@
 package ObjetosJugables;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,8 +9,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 import strategy.StrategyAnguilatroz;
+import strategy.StrategyAnguila;
 
 public class Anguilatroz extends TipoObjetoMovi{
+	
+	private boolean esAnguila = false;
 	
 	public Anguilatroz() {
 
@@ -25,6 +29,15 @@ public class Anguilatroz extends TipoObjetoMovi{
 		}
 		
 	  public void dibujar(SpriteBatch batch) {
+		  
+		  
+		if(puntos >= 50 && esAnguila == false) {
+				setStrategy(new StrategyAnguila());
+				setTextura(new Texture(Gdx.files.internal("anguila.png")));
+				this.vidas = metodosObjMovi.getVidas();
+				this.velx = metodosObjMovi.curarVelx();
+				esAnguila = true;
+		}
 		 
 		if (!herido)  
 		   {player.draw(batch); 

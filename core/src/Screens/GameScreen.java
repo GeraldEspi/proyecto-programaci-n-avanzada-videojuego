@@ -25,6 +25,7 @@ import ObjetosJugables.Anguilatroz;
 import ObjetosJugables.Colibri;
 import ObjetosJugables.Falcon;
 import ObjetosJugables.TipoObjetoMovi;
+import strategy.StrategyColibri;
 
 public class GameScreen implements Screen {
 	final GameLluviaMenu game;
@@ -157,7 +158,6 @@ public class GameScreen implements Screen {
 		//_------------------------------------------------------------------------
 		//----------------------------- ver herido
 		if (!player.estaHerido()) {
-			// movimiento del tarro desde teclado
 			parallaxBackground.setSpeed(1);
 	        player.actualizarMovimiento();        
 			// caida de la lluvia 
@@ -170,6 +170,8 @@ public class GameScreen implements Screen {
 	    	  dispose();
 	       }
 		}
+		
+		
 		
 		if((player.estaHerido())) parallaxBackground.setSpeed(0);
 		//-------------------------------------------

@@ -101,16 +101,9 @@ public class CampoPeces implements TipoObstaculo
 		      	
 		      raindrop.x -= 300 * Gdx.graphics.getDeltaTime();
 		      
-		      	if(fishTipo.getActorTipo(i)==2)
-			    	 
-		       	  raindrop.y -= 10 * (Gdx.graphics.getDeltaTime()); 
-		       	 
-		      
-	    	  
-		      
-		      
-		    	 
-		      
+		      if(fishTipo.getActorTipo(i)==2)
+			    	 raindrop.y -= 10 * (Gdx.graphics.getDeltaTime()); 
+
 		      
 		      //sale de visión y se elimina
 		      if(raindrop.x + 64 < 0) {

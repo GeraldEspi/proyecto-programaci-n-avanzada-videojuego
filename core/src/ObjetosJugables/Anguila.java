@@ -34,9 +34,8 @@ public class Anguila extends TipoObjetoMovi{
 			desactivarEspecial();
 		}
 		
-		if (!herido)  
-		   {player.draw(batch); 
-		  
+		if (!herido){
+			player.draw(batch); 
 		   }
 		   
 		 else {
