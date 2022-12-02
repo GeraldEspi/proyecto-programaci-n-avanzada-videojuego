@@ -11,7 +11,6 @@ import Screens.MainMenuScreen;
 
 		private SpriteBatch batch;
 		private BitmapFont font;
-		private int higherScore;
 
 		public void create() {
 			batch = new SpriteBatch();
@@ -36,13 +35,7 @@ import Screens.MainMenuScreen;
 			return font;
 		}
 
-		public int getHigherScore() {
-			return higherScore;
-		}
-
-		public void setHigherScore(int higherScore) {
-			this.higherScore = higherScore;
-		}
+	
 		
 
 	}

@@ -60,8 +60,8 @@ public class Lluvia implements TipoObstaculo{
 	      if (numRand <= 80)
 	      {
 	    	  gotasTipo.addActorTipo(2);
-	    	  raindrop.width = 32;
-		      raindrop.height = 32;
+	    	  raindrop.width = 24;
+		      raindrop.height = 24;
 		      gotasPos.addActor(raindrop);
 	      }
 	      if (numRand > 80 &&  numRand < 97)

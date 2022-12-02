@@ -13,7 +13,7 @@ public class Colibri extends TipoObjetoMovi{
 	
 	public Colibri() {
 		   
-		   super(new Texture(Gdx.files.internal("colibri.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("colibri.png")),new Texture(Gdx.files.internal("Colibri_slowed.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyColibri();
 		   this.vidas = metodosObjMovi.getVidas();

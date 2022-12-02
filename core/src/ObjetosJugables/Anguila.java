@@ -14,7 +14,7 @@ public class Anguila extends TipoObjetoMovi{
 	  
 	  public Anguila() {
 
-		   super(new Texture(Gdx.files.internal("anguila.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("anguila.png")),null,Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyAnguila();
 		   this.vidas = metodosObjMovi.getVidas();

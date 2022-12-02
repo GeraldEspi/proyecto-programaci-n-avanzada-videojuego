@@ -46,12 +46,12 @@ public class SelectScreen implements Screen{
 			
 			if (Gdx.input.isKeyPressed(Input.Keys.F)) {
 				opcionPerso=1;
-				game.setScreen(new GameScreen(game, opcionGame, opcionPerso));
+				game.setScreen(new GameScreen(game, opcionGame, opcionPerso, null));
 				dispose();
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.C)) {
 				opcionPerso=2;
-				game.setScreen(new GameScreen(game, opcionGame, opcionPerso));
+				game.setScreen(new GameScreen(game, opcionGame, opcionPerso, null));
 				dispose();
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -66,12 +66,12 @@ public class SelectScreen implements Screen{
 			
 			if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 				opcionPerso=1;
-				game.setScreen(new GameScreen(game, opcionGame, opcionPerso));
+				game.setScreen(new GameScreen(game, opcionGame, opcionPerso, null));
 				dispose();
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
 				opcionPerso=2;
-				game.setScreen(new GameScreen(game, opcionGame, opcionPerso));
+				game.setScreen(new GameScreen(game, opcionGame, opcionPerso, null));
 				dispose();
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {

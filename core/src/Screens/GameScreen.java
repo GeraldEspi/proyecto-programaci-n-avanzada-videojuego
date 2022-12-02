@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,7 +16,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.GameLluviaMenu;
+import com.mygdx.game.Highscore;
 import com.mygdx.game.ParallaxBackground;
+import com.mygdx.game.Timers;
 
 import ObjetosJugables.Anguila;
 import ObjetosJugables.Anguilatroz;
@@ -28,6 +28,7 @@ import ObjetosJugables.TipoObjetoMovi;
 
 public class GameScreen implements Screen {
 	final GameLluviaMenu game;
+	private Highscore highscore;
     private OrthographicCamera camera;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
@@ -36,24 +37,30 @@ public class GameScreen implements Screen {
 	private int opcionGame;
 	private int opcionPerso;
 	private Stage stage;
+	
+
 
 	private ParallaxBackground parallaxBackground;
 	 
 	//boolean activo = true;
 
-	public GameScreen(final GameLluviaMenu game, int opcion1, int opcion2) {
+	public GameScreen(final GameLluviaMenu game, int opcion1, int opcion2, Highscore highscore ) {
 		this.game = game;
+		this.highscore = Highscore.getHighscore();
         this.batch = game.getBatch();
         this.font = game.getFont();
         this.opcionGame = opcion1;
     	this.opcionPerso = opcion2;
+    	
 	    // camera
 	    camera = new OrthographicCamera();
 	    camera.setToOrtho(false, 1280, 720);
         batch = new SpriteBatch();
         
+        
         if(opcionGame == 1) 
         {
+        	
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
@@ -87,6 +94,7 @@ public class GameScreen implements Screen {
         
         if(opcionGame == 2) 
         {
+        	
         	stage = new Stage(new ScreenViewport());
         	font.setColor(Color.BLACK); // color setteado
         	 
@@ -124,6 +132,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		
 		//limpia la pantalla con color azul obscuro.
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		//actualizar matrices de la cámara
@@ -142,9 +151,9 @@ public class GameScreen implements Screen {
 
 		
 		//dibujar textos
-		font.draw(batch, "Gotas totales: " + player.getPuntos(), 5, 700);
-		font.draw(batch, "Vidas : " + player.getVidas(), (camera.viewportWidth/2)+1, 700);
-		font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth-250, 700);
+		font.draw(batch, "Puntos totales: " + player.getPuntos(), 5, 700);
+		font.draw(batch, "Vidas : " + player.getVidas(), (camera.viewportWidth/2)-40, 700);
+		font.draw(batch, "HighScore : " + highscore.getHigherScore(), camera.viewportWidth-305, 700);
 		//_------------------------------------------------------------------------
 		//----------------------------- ver herido
 		if (!player.estaHerido()) {
@@ -154,8 +163,8 @@ public class GameScreen implements Screen {
 			// caida de la lluvia 
 	       if (!obstaculo.actualizarMovimiento(player)) {
 	    	  //actualizar HigherScore
-	    	  if (game.getHigherScore()<player.getPuntos())
-	    		  game.setHigherScore(player.getPuntos());  
+	    	  if (highscore.getHigherScore()<player.getPuntos())
+	    		  highscore.setHigherScore(player.getPuntos());  
 	    	  //ir a la ventana de finde juego y destruir la actual
 	    	  game.setScreen(new GameOverScreen(game,opcionGame,opcionPerso));
 	    	  dispose();

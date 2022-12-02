@@ -18,7 +18,7 @@ public class Falcon extends TipoObjetoMovi {
 
 	  public Falcon() {
 		   
-		   super(new Texture(Gdx.files.internal("falcon.png")), Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("falcon.png")), new Texture(Gdx.files.internal("slowedFalcon.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyFalcon();
 		   this.vidas = metodosObjMovi.getVidas();

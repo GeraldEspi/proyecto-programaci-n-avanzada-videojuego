@@ -27,7 +27,7 @@ public class StrategyColibri implements StrategyObjMovi{
 	
 	@Override
 	public int dañarVidas(int vidas, int a){
-		vidas-=5;
+		vidas-=3;
 		return vidas;
 	}
 	

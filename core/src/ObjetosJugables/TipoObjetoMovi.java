@@ -13,6 +13,7 @@ public abstract class TipoObjetoMovi {
 	
 	   protected Sprite player;
 	   protected Texture playerSkin;
+	   protected Texture playerEffectSkin;
 	   protected Sound sonidoHerido;
 	   protected Sound healSound;
 	   protected StrategyObjMovi metodosObjMovi;
@@ -23,8 +24,9 @@ public abstract class TipoObjetoMovi {
 	   protected int tiempoHeridoMax=50;
 	   protected int tiempoHerido;
 	   
-	   public TipoObjetoMovi(Texture tex, Sound ss) {
+	   public TipoObjetoMovi(Texture tex, Texture tex2, Sound ss) {
 		   playerSkin = tex;
+		   playerEffectSkin = tex2;
 		   sonidoHerido = ss;  
 	   }
 	   
@@ -58,6 +60,7 @@ public abstract class TipoObjetoMovi {
 	   {
 		   vidas = metodosObjMovi.curarVidas(this.vidas);
 		   velx = metodosObjMovi.curarVelx();
+		   player.setTexture(playerSkin);
 		   healSound.play();
 	   }
 	   
@@ -74,6 +77,7 @@ public abstract class TipoObjetoMovi {
 			  vidas = metodosObjMovi.dañarVidas(this.vidas, a);
 			  velx = metodosObjMovi.dañarVelx(this.velx);
 			  herido = true;
+			  player.setTexture(playerEffectSkin);
 			  tiempoHerido=tiempoHeridoMax;
 			  sonidoHerido.play();
 	   }

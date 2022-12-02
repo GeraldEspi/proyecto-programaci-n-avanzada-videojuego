@@ -26,7 +26,7 @@ public class StrategyFalcon implements StrategyObjMovi{
 	
 	@Override
 	public int dañarVidas(int vidas, int a){
-		vidas -=3;
+		vidas -=2;
 		return vidas;
 	}
 	
