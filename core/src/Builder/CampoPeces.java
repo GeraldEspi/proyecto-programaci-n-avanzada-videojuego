@@ -115,17 +115,18 @@ public class CampoPeces implements Builder
 		    	  if(!player.especialActivado())
 		    	  {
 		    	  player.dañar();
-		    	  
-		    	
+		    	  }
 		    	  if (player.getVidas()<=0)
-		    		 return false; // si se queda sin vidas retorna falso /game over
+			    		 return false; // si se queda sin vidas retorna falso /game over
 		    	  fishPos.removeActor(i);  
 		    	  fishTipo.removeActorTipo(i);
-		    	  }
 		      	}
 		    	if(fishTipo.getActorTipo(i)==2) { //alga
+		          if(!player.especialActivado())
+		          {
 		    	  player.sumarPuntos(1);
 		          getItemSound.play();
+		          }
 		          fishPos.removeActor(i);  
 		    	  fishTipo.removeActorTipo(i);
 		      	}

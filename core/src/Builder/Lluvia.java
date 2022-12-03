@@ -22,7 +22,6 @@ public class Lluvia implements Builder{
     private Texture gotaMala;
     private Texture gotaMuyBuena;
     private Texture granizo;
-    private long seconds;//se usara despues
     private Sound getItemSound;
     private Sound freezeSound1;
     private Sound freezeSound2;

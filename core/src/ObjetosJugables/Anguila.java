@@ -18,7 +18,7 @@ public class Anguila extends TipoObjetoMovi{
 	  
 	  public Anguila() {
 
-		   super(new Texture(Gdx.files.internal("anguila.png")),null,new Texture(Gdx.files.internal("camuflaje.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
+		   super(new Texture(Gdx.files.internal("anguila.png")),null,new Texture(Gdx.files.internal("ShieldedAngilatros.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		   this.healSound = Gdx.audio.newSound(Gdx.files.internal("goodSound.mp3"));
 		   this.metodosObjMovi = new StrategyAnguila();
 		   this.vidas = metodosObjMovi.getVidas();
@@ -82,7 +82,7 @@ public class Anguila extends TipoObjetoMovi{
 		   
 		  
 		  
-		   if((Gdx.input.isKeyPressed(Input.Keys.Q))) especial();
+		   if((Gdx.input.isKeyPressed(Input.Keys.Q)) && esAnguilatroz == true) especial();
 		   
 		   // que no se salga de los bordes izq y der
 		   if(player.getX() < 0) player.setX(0);
